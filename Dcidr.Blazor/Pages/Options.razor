@@ -11,7 +11,7 @@
 <ul>
     @foreach (var option in AppModel.Decision.Options.Items)
     {
-        <DecisionItem Item="@option" OnDelete="@( () => AppModel.Decision.Options.Remove(option))" />
+        <DecisionItem @key="@option" Item="@option" OnDelete="@( () => AppModel.Decision.Options.Remove(option))" />
     }
 </ul>
 
