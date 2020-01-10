@@ -58,11 +58,11 @@ namespace Dcidr.Model
                     var adjustedOptionRdv = criterionRdvs[crit] * optionRdv.Rdv;
                     adjustedOptionCriteriaRdvs.Add((optionRdv.Option, crit, adjustedOptionRdv));
                 }
-
             }
 
             return adjustedOptionCriteriaRdvs.GroupBy(x => x.option)
                 .Select(g => new Result(g.Key, g.Sum(o => o.adjustedRdv)))
+                .OrderByDescending(r=>r.Score)
                 .ToList();
         }
 

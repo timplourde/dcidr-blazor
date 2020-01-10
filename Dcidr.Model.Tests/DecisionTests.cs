@@ -108,13 +108,29 @@ namespace Dcidr.Model.Tests
         public void RemoveCriteria_RemovesOptionComparisons_AndCriteriaComparisons()
         {
             var d = new Decision();
+            d.Options.Add("opt-a");
+            d.Options.Add("opt-b");
+            d.Criteria.Add("crit-x");
+            d.Criteria.Add("crit-y");
+            Assert.AreEqual(2, d.OptionComparisons.Count);
+            Assert.AreEqual(1, d.CriteriaComparisons.Count);
+
+            d.Criteria.Remove("crit-z");
+            Assert.AreEqual(2, d.OptionComparisons.Count);
+            Assert.AreEqual(1, d.CriteriaComparisons.Count);
+        }
+
+        [TestMethod]
+        public void SettingAllWeights_CreatesAReport()
+        {
+            var d = new Decision();
             d.Options.Add("o1");
             d.Options.Add("o2");
             d.Criteria.Add("c1");
             d.Criteria.Add("c2");
             d.Criteria.Add("c3");
 
-            foreach(var oc in d.OptionComparisons)
+            foreach (var oc in d.OptionComparisons)
             {
                 oc.SetWeight(Weight.GreaterThan);
             }
@@ -123,21 +139,14 @@ namespace Dcidr.Model.Tests
             d.CriteriaComparisons.First(c => c.CriteriaOne == "c1" && c.CriteriaTwo == "c3").SetWeight(Weight.MuchGreaterThan);
             d.CriteriaComparisons.First(c => c.CriteriaOne == "c2" && c.CriteriaTwo == "c3").SetWeight(Weight.MuchLessThan);
 
-            //expect(sut.report).to.deep.equal([{"option":"o1","score":0.9615384615384613},{"option":"o2","score":0.038461538461538464}]);
             Assert.AreEqual(2, d.Results.Count());
             var winner = d.Results.First();
             Assert.AreEqual("o1", winner.Option);
-            Assert.AreEqual(0.9615384615384613, winner.Score);
+            Assert.AreEqual("0.9615", winner.Score.ToString("N4"));
 
             var secondPlace = d.Results.ElementAt(1);
-            Assert.AreEqual("o2", winner.Option);
-            Assert.AreEqual(0.038461538461538464, winner.Score);
-        }
-
-        [TestMethod]
-        public void SettingAllWeights_CreatesAReport()
-        {
-
+            Assert.AreEqual("o2", secondPlace.Option);
+            Assert.AreEqual("0.0385", secondPlace.Score.ToString("N4"));
         }
     }
 }
