@@ -1,0 +1,11 @@
+﻿<li>
+    <strong>@Item</strong> <button @onclick="OnDelete">x</button>
+</li>
+
+@code {
+    [Parameter]
+    public string Item { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnDelete { get; set; }
+}

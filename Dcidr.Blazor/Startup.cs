@@ -7,6 +7,7 @@ namespace Dcidr.Blazor
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(typeof(DcidrAppModel));
         }
 
         public void Configure(IComponentsApplicationBuilder app)

@@ -1,0 +1,41 @@
+﻿@page "/options"
+@inject DcidrAppModel AppModel
+@using Dcidr.Blazor.Shared
+
+<h1>Options</h1>
+
+<p>
+    Decision Id @AppModel.Decision.Id
+</p>
+
+<ul>
+    @foreach (var option in AppModel.Decision.Options.Items)
+    {
+        <DecisionItem Item="@option" OnDelete="@( () => AppModel.Decision.Options.Remove(option))" />
+    }
+</ul>
+
+<input type="text" @bind="newOptionInput"/>
+
+<button @onclick="AddOption">Add</button>
+
+@if (AppModel.Decision.HasEnoughOptions)
+{
+    <p>
+        has enough
+    </p>
+}
+
+
+@code {
+    private string newOptionInput;
+
+    private void AddOption()
+    {
+        if (!string.IsNullOrWhiteSpace(newOptionInput))
+        {
+            AppModel.Decision.Options.Add(newOptionInput.Trim());
+            newOptionInput = String.Empty;
+        }
+    }
+}

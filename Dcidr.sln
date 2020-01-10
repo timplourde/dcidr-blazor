@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dcidr.Model", "Dcidr.Model\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dcidr.Blazor", "Dcidr.Blazor\Dcidr.Blazor.csproj", "{B293B192-556E-4143-9E82-3A565318DE93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dcidr.Model.Tests", "Dcidr.Model.Tests\Dcidr.Model.Tests.csproj", "{FC1F182D-3E0F-403A-B589-3DE69CB7DEFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dcidr.Model.Tests", "Dcidr.Model.Tests\Dcidr.Model.Tests.csproj", "{FC1F182D-3E0F-403A-B589-3DE69CB7DEFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

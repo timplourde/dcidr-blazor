@@ -1,0 +1,42 @@
+﻿@page "/criteria"
+@inject DcidrAppModel AppModel
+@using Dcidr.Blazor.Shared
+
+<h1>Criteria</h1>
+
+<p>
+    Decision Id @AppModel.Decision.Id
+</p>
+
+<ul>
+    @foreach (var crit in AppModel.Decision.Criteria.Items)
+    {
+        <DecisionItem @key="crit" Item="@crit" OnDelete="@( (_) => AppModel.Decision.Criteria.Remove(crit))" />
+    }
+</ul>
+
+<input type="text" @bind="newCriteriaInput"/>
+
+<button @onclick="AddCriteria">Add</button>
+
+@if (AppModel.Decision.HasEnoughCriteria)
+{
+    <p>
+        <NavLink href="options">Next Step</NavLink>
+    </p>
+}
+
+
+@code {
+
+    private string newCriteriaInput;
+
+    private void AddCriteria()
+    {
+        if (!string.IsNullOrWhiteSpace(newCriteriaInput))
+        {
+            AppModel.Decision.Criteria.Add(newCriteriaInput.Trim());
+            newCriteriaInput = string.Empty;
+        }
+    }
+}
