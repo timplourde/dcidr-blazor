@@ -29,6 +29,8 @@ namespace Dcidr.Model
         public bool HasEnoughCriteria => Criteria.Count >= 2;
         public bool AllCriteriaComparisonsHaveWeights => CriteriaComparisons.All(c => c.Weight != null);
         public bool AllOptionComparisonsHaveWeights => OptionComparisons.All(c => c.Weight != null);
+        public bool ResultPrerequisitesMet => HasEnoughCriteria && HasEnoughOptions
+            && AllCriteriaComparisonsHaveWeights && AllOptionComparisonsHaveWeights;
 
         private void Options_OnChange(object sender, EventArgs e)
         {
@@ -50,7 +52,7 @@ namespace Dcidr.Model
 
         private void UpdateResults()
         {
-            if(HasEnoughCriteria && HasEnoughOptions && AllCriteriaComparisonsHaveWeights && AllOptionComparisonsHaveWeights)
+            if(ResultPrerequisitesMet)
             {
                 Results = ResultGenerator.GenerateResults(this);
             }
@@ -58,11 +60,6 @@ namespace Dcidr.Model
             {
                 Results.Clear();
             }
-        }
-
-        private List<Result> GenerateResults()
-        {
-            throw new NotImplementedException();
         }
 
         private void UpdateOptionComparisons()
@@ -91,6 +88,7 @@ namespace Dcidr.Model
             {
                 if (!proposedHashCodes.Contains(exitstingOc.GetHashCode()))
                 {
+                    exitstingOc.OnWeightChange -= OnWeightChange;
                     OptionComparisons.Remove(exitstingOc);
                 }
             }
@@ -121,6 +119,7 @@ namespace Dcidr.Model
             {
                 if (!proposedHashCodes.Contains(exitstingCc.GetHashCode()))
                 {
+                    exitstingCc.OnWeightChange -= OnWeightChange;
                     CriteriaComparisons.Remove(exitstingCc);
                 }
             }

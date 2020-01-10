@@ -139,6 +139,8 @@ namespace Dcidr.Model.Tests
             d.CriteriaComparisons.First(c => c.CriteriaOne == "c1" && c.CriteriaTwo == "c3").SetWeight(Weight.MuchGreaterThan);
             d.CriteriaComparisons.First(c => c.CriteriaOne == "c2" && c.CriteriaTwo == "c3").SetWeight(Weight.MuchLessThan);
 
+            Assert.IsTrue(d.ResultPrerequisitesMet);
+
             Assert.AreEqual(2, d.Results.Count());
             var winner = d.Results.First();
             Assert.AreEqual("o1", winner.Option);
