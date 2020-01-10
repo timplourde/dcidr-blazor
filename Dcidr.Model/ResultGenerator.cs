@@ -31,8 +31,7 @@ namespace Dcidr.Model
                     Rdv = g.Sum(cc => GetWeightFactor(cc.Weight.Value)) / totalCritCompWeight
                 }).ToDictionary(d=>d.Criteria, d=>d.Rdv);
 
-            // key is criteria, value is option - RDV
-            var optionRdvsByCriterion = new Dictionary<string, Dictionary<string, decimal>>();
+            var adjustedOptionCriteriaRdvs = new List<(string option, string criteria, decimal adjustedRdv)>();
             foreach(var crit in decision.Criteria.Items)
             {
                 var ocs = decision.OptionComparisons.Where(oc => oc.Criterion == crit).ToList();
@@ -52,15 +51,19 @@ namespace Dcidr.Model
                    {
                        Option = g.Key,
                        Rdv = g.Sum(cc => GetWeightFactor(cc.Weight.Value)) / totalWeight
-                   }).ToDictionary(d => d.Option, d => d.Rdv);
+                   }).ToList();
 
-                optionRdvsByCriterion.Add(crit, optionRdvs);
+                foreach(var optionRdv in optionRdvs)
+                {
+                    var adjustedOptionRdv = criterionRdvs[crit] * optionRdv.Rdv;
+                    adjustedOptionCriteriaRdvs.Add((optionRdv.Option, crit, adjustedOptionRdv));
+                }
+
             }
 
-            var results = new List<Result>();
-           
-
-            return new List<Result>();
+            return adjustedOptionCriteriaRdvs.GroupBy(x => x.option)
+                .Select(g => new Result(g.Key, g.Sum(o => o.adjustedRdv)))
+                .ToList();
         }
 
         private static decimal GetWeightFactor(Weight weight)
