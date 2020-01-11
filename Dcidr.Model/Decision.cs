@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dcidr.Model.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,7 @@ namespace Dcidr.Model
         public Decision()
         {
             Id = Guid.NewGuid().ToString();
+            DateCreatedUtc = DateTime.UtcNow;
             Options = new DecisionItemCollection();
             Options.OnChange += Options_OnChange;
             Criteria = new DecisionItemCollection();
@@ -18,9 +20,11 @@ namespace Dcidr.Model
             Results = new List<Result>();
         }
 
-        public string Id { get; }
-        public DecisionItemCollection Options { get; set; }
-        public DecisionItemCollection Criteria { get; set; }
+        public string Id { get; private set; }
+        public DateTime DateCreatedUtc { get; private set; }
+        public string Name { get; set; }
+        public DecisionItemCollection Options { get; private set; }
+        public DecisionItemCollection Criteria { get; private set; }
         public List<CriteriaComparison> CriteriaComparisons { get; private set; }
         public List<OptionComparison> OptionComparisons { get; private set; }
         public List<Result> Results { get; private set; }
@@ -31,6 +35,83 @@ namespace Dcidr.Model
         public bool AllOptionComparisonsHaveWeights => OptionComparisons.All(c => c.Weight != null);
         public bool ResultPrerequisitesMet => HasEnoughCriteria && HasEnoughOptions
             && AllCriteriaComparisonsHaveWeights && AllOptionComparisonsHaveWeights;
+
+        public static Decision Deserialize(SerializedDecision serializedDecision)
+        {
+            var d = new Decision();
+            d.Id = serializedDecision.Id;
+            d.Name = serializedDecision.Name;
+            d.DateCreatedUtc = serializedDecision.DateCreatedUtc;
+            if(serializedDecision.Criteria != null)
+            {
+                foreach (var crit in serializedDecision.Criteria)
+                {
+                    d.Criteria.Add(crit);
+                }
+            }
+            
+            if(serializedDecision.Options != null)
+            {
+                foreach (var opt in serializedDecision.Options)
+                {
+                    d.Options.Add(opt);
+                }
+            }
+
+            if(serializedDecision.OptionComparisons != null)
+            {
+                foreach(var soc in serializedDecision.OptionComparisons)
+                {
+                    var oc = d.OptionComparisons.FirstOrDefault(doc => doc.Criterion == soc.Criterion
+                        && doc.OptionOne == soc.OptionOne
+                        && doc.OptionTwo == soc.OptionTwo);
+                    if(oc != null && soc.Weight.HasValue)
+                    {
+                        oc.SetWeight(soc.Weight.Value);
+                    }
+                }
+            }
+
+            if (serializedDecision.CriteriaComparisons != null)
+            {
+                foreach (var scc in serializedDecision.CriteriaComparisons)
+                {
+                    var cc = d.CriteriaComparisons.FirstOrDefault(dcc => dcc.CriteriaOne == scc.CriteriaOne
+                        && dcc.CriteriaTwo == scc.CriteriaTwo);
+                    if (cc != null && scc.Weight.HasValue)
+                    {
+                        cc.SetWeight(scc.Weight.Value);
+                    }
+                }
+            }
+
+            return d;
+        }
+
+        public SerializedDecision Serialize()
+        {
+            return new SerializedDecision
+            {
+                Id = Id,
+                Name = Name,
+                DateCreatedUtc = DateCreatedUtc,
+                Options = Options.Items.ToArray(),
+                Criteria = Criteria.Items.ToArray(),
+                CriteriaComparisons = CriteriaComparisons.Select(cc => new SerializedCriteriaComparison
+                {
+                    CriteriaOne = cc.CriteriaOne,
+                    CriteriaTwo = cc.CriteriaTwo,
+                    Weight = cc.Weight
+                }).ToArray(),
+                OptionComparisons = OptionComparisons.Select(oc => new SerializedOptionComparison
+                {
+                    Criterion = oc.Criterion,
+                    OptionOne = oc.OptionOne,
+                    OptionTwo = oc.OptionTwo,
+                    Weight = oc.Weight
+                }).ToArray()
+            };
+        }
 
         private void Options_OnChange(object sender, EventArgs e)
         {
