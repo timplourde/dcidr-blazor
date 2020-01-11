@@ -1,0 +1,26 @@
+﻿@page "/compare-options"
+@inject DcidrAppModel AppModel
+@using Dcidr.Blazor.Shared
+
+<h1>Compare Options</h1>
+
+<p>
+    Decision Id @AppModel.Decision.Id
+</p>
+
+
+@foreach (var oc in AppModel.Decision.OptionComparisons)
+{
+    <OptionComparisonInput @key="@oc.GetHashCode()" Item="@oc" WeightChanged="StateHasChanged" />
+}
+
+@if (AppModel.Decision.AllOptionComparisonsHaveWeights)
+{
+    <p>
+        <NavLink href="compare-criteria">Next Step</NavLink>
+    </p>
+}
+
+@code {
+
+}

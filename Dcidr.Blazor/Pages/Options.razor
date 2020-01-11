@@ -15,14 +15,14 @@
     }
 </ul>
 
-<input type="text" @bind="newOptionInput"/>
+<input type="text" @bind="newOptionInput" />
 
 <button @onclick="AddOption">Add</button>
 
 @if (AppModel.Decision.HasEnoughOptions)
 {
     <p>
-        has enough
+        <NavLink href="compare-options">Next Step</NavLink>
     </p>
 }
 

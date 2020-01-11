@@ -1,0 +1,21 @@
+﻿@page "/results"
+@inject DcidrAppModel AppModel
+@using Dcidr.Blazor.Shared
+
+<h1>Results</h1>
+
+<p>
+    Decision Id @AppModel.Decision.Id
+</p>
+
+<ul>
+    @foreach (var result in AppModel.Decision.Results)
+    {
+        <li><strong>@result.Option</strong> : @result.Score.ToString("N2")</li>
+    }
+</ul>
+
+
+@code {
+
+}

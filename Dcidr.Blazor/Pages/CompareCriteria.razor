@@ -1,0 +1,26 @@
+﻿@page "/compare-criteria"
+@inject DcidrAppModel AppModel
+@using Dcidr.Blazor.Shared
+
+<h1>Compare Criteria</h1>
+
+<p>
+    Decision Id @AppModel.Decision.Id
+</p>
+
+
+@foreach (var cc in AppModel.Decision.CriteriaComparisons)
+{
+    <CriteriaComparisonInput @key="@cc.GetHashCode()" Item="@cc" WeightChanged="StateHasChanged" />
+}
+
+@if (AppModel.Decision.ResultPrerequisitesMet)
+{
+    <p>
+        <NavLink href="results">View Results</NavLink>
+    </p>
+}
+
+@code {
+
+}
