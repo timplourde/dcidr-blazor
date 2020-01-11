@@ -4,11 +4,14 @@
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+<p>
+    <button @onclick="NewDecision">New Decision</button>
+</p>
 
-<button @onclick="NewDecision">New Decision</button>
+<p>
+    <NavLink href="archive">Archive</NavLink>
+</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
 
 @code {
     private void NewDecision()

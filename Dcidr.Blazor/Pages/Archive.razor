@@ -1,0 +1,47 @@
+﻿@page "/archive"
+@using Dcidr.Model.Serialization
+
+@inject DcidrAppModel AppModel
+@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+
+<h1>Archive</h1>
+
+@if (!isLoading)
+{
+    @if (showList)
+    {
+        @foreach (var d in decisionArchive.Decisions)
+        {
+            <p>@d.Id</p>
+        }
+    }
+    else
+    {
+        <em>No archived decisions</em>
+    }
+}
+else
+{
+    <h3>Loading...</h3>
+}
+
+
+@code {
+
+    private bool isLoading;
+    private bool showList;
+    private DecisionArchive decisionArchive;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        decisionArchive = await localStorage.GetItemAsync<DecisionArchive>("decision-archive");
+        showList = decisionArchive?.Decisions != null;
+
+        Console.WriteLine(showList ? decisionArchive.Decisions.Length.ToString() : "nada");
+
+        isLoading = false;
+    }
+}

@@ -1,6 +1,9 @@
 ﻿@page "/results"
 @inject DcidrAppModel AppModel
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject NavigationManager NavigationManager
 @using Dcidr.Blazor.Shared
+@using System.Threading
 
 <h1>Results</h1>
 
@@ -15,7 +18,81 @@
     }
 </ul>
 
+<hr />
+
+<p>
+    @if (!showSaveDialog)
+    {
+        <button @onclick="ShowSave">Save</button>
+    }
+    else
+    {
+        <label for="decision-name">Name:</label> <input name="decision-name" maxlength="20" type="text" @bind="nameInput" />
+        <button disabled="@isLoading" @onclick="SaveAsync">Save</button>
+        <button @onclick="CancelSave">Cancel</button>
+    }
+</p>
 
 @code {
+    private bool showSaveDialog;
+    private string nameInput;
+    private bool isLoading;
 
+    private void ShowSave()
+    {
+        nameInput = AppModel.Decision.Name;
+        showSaveDialog = true;
+    }
+
+    private void CancelSave()
+    {
+        nameInput = string.Empty;
+        showSaveDialog = false;
+    }
+
+    private async Task SaveAsync()
+    {
+        if (string.IsNullOrWhiteSpace(nameInput) || nameInput.Length < 1) return;
+
+        isLoading = true;
+        AppModel.Decision.Name = nameInput;
+
+        var serializedDecision = AppModel.Decision.Serialize();
+
+        await localStorage.SetItemAsync($"decision-{AppModel.Decision.Id}", serializedDecision);
+
+        var decsisionArchiveItem = new DecisionArchiveItem
+        {
+            Id = AppModel.Decision.Id,
+            Name = AppModel.Decision.Name,
+            DateCreatedUtc = AppModel.Decision.DateCreatedUtc
+        };
+
+        var archive = await localStorage.GetItemAsync<DecisionArchive>("decision-archive");
+        if (archive != null)
+        {
+            if (archive.Decisions == null)
+            {
+                archive.Decisions = new DecisionArchiveItem[] { };
+            }
+            archive.Decisions.Append(decsisionArchiveItem);
+        }
+        else
+        {
+            archive = new DecisionArchive
+            {
+                Decisions = new[]
+                {
+                    decsisionArchiveItem
+                }
+            };
+        }
+
+        await localStorage.SetItemAsync("decision-archive", archive);
+
+        isLoading = false;
+
+        NavigationManager.NavigateTo("/");
+
+    }
 }
