@@ -13,10 +13,6 @@ namespace Dcidr.Blazor
         public void NewDecision()
         {
             Decision = new Decision();
-            Decision.Options.Add("o1");
-            Decision.Options.Add("o2");
-            Decision.Criteria.Add("c1");
-            Decision.Criteria.Add("c2");
         }
     }
 }
