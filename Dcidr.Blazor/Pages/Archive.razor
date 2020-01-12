@@ -14,7 +14,10 @@
     {
         @foreach (var d in decisionArchive.Decisions)
         {
-            <p>@d.Id</p>
+            <ArchiveItem @key="@d.Id" 
+                         Item="@d" 
+                         OnDelete="DeleteDecisionAsync" 
+                         OnLoad="LoadDecisionAsync"></ArchiveItem>
         }
     }
     else
@@ -34,14 +37,48 @@ else
     private bool showList;
     private DecisionArchive decisionArchive;
 
-    protected override async Task OnInitializedAsync()
+    private async Task Refresh()
     {
         isLoading = true;
-        decisionArchive = await localStorage.GetItemAsync<DecisionArchive>("decision-archive");
-        showList = decisionArchive?.Decisions != null;
-
-        Console.WriteLine(showList ? decisionArchive.Decisions.Length.ToString() : "nada");
-
+        decisionArchive = await localStorage.GetItemAsync<DecisionArchive>("decision-archive") ?? new DecisionArchive();
+        showList = decisionArchive.Decisions.Any();
         isLoading = false;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+
+    private async Task DeleteDecisionAsync(DecisionArchiveItem decisionArchiveItem)
+    {
+        await localStorage.RemoveItemAsync($"decision-{decisionArchiveItem.Id}");
+
+        await localStorage.GetItemAsync<DecisionArchive>("decision-archive");
+        decisionArchive.Remove(decisionArchiveItem);
+        await localStorage.SetItemAsync("decision-archive", decisionArchive);
+        
+        await Refresh();
+    }
+
+    private async Task LoadDecisionAsync(DecisionArchiveItem decisionArchiveItem)
+    {
+        var sd = await localStorage.GetItemAsync<SerializedDecision>($"decision-{decisionArchiveItem.Id}");
+        if (sd == null)
+        {
+            System.Diagnostics.Debug.Fail($"Decision {decisionArchiveItem.Id} was not found in local storage");
+        }
+        else
+        {
+            try
+            {
+                AppModel.Decision = Decision.Deserialize(sd);
+                NavigationManager.NavigateTo("criteria");
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.Fail("Cound not deserialize decision", e.Message);
+            }
+        }
     }
 }

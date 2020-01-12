@@ -69,24 +69,12 @@
         };
 
         var archive = await localStorage.GetItemAsync<DecisionArchive>("decision-archive");
-        if (archive != null)
+        if(archive == null)
         {
-            if (archive.Decisions == null)
-            {
-                archive.Decisions = new DecisionArchiveItem[] { };
-            }
-            archive.Decisions.Append(decsisionArchiveItem);
+            archive = new DecisionArchive();
         }
-        else
-        {
-            archive = new DecisionArchive
-            {
-                Decisions = new[]
-                {
-                    decsisionArchiveItem
-                }
-            };
-        }
+
+        archive.Upsert(decsisionArchiveItem);
 
         await localStorage.SetItemAsync("decision-archive", archive);
 

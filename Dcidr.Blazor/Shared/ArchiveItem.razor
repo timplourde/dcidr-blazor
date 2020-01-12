@@ -1,0 +1,26 @@
+﻿<li>
+    <strong>@Item.Name (@Item.DateCreatedUtc.ToShortDateString())</strong> 
+    <button @onclick="HandleDelete">Delete</button> 
+    <button @onclick="HandleLoad">Load</button>
+</li>
+
+@code {
+    [Parameter]
+    public DecisionArchiveItem Item { get; set; }
+
+    private void HandleDelete(MouseEventArgs e)
+    {
+        OnDelete.InvokeAsync(Item);
+    }
+
+    private void HandleLoad(MouseEventArgs e)
+    {
+        OnLoad.InvokeAsync(Item);
+    }
+
+    [Parameter]
+    public EventCallback<DecisionArchiveItem> OnDelete { get; set; }
+
+    [Parameter]
+    public EventCallback<DecisionArchiveItem> OnLoad { get; set; }
+}
