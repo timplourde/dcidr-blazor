@@ -96,7 +96,7 @@ main {
     padding: .6rem;
     margin-bottom: 1rem;
 }
-.decicion-item-delete:hover {
+.decicion-item-button:hover {
     cursor: pointer;
 }
 
