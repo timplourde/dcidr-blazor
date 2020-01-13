@@ -1,6 +1,7 @@
 ﻿@page "/options"
 @inject DcidrAppModel AppModel
 @using Dcidr.Blazor.Shared
+@inject NavigationManager NavigationManager
 
 
 <h1>Enter your options</h1>
@@ -12,24 +13,26 @@
     </small>
 </p>
 
-<ul class="decision-item-list"> 
+<div class="input-group mb-3 input-group-container">
+    <input type="text" class="form-control" @bind="newOptionInput" @onkeyup="OnNewItemKeyup"
+           placeholder="Add an option">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" @onclick="AddOption" type="button">Add</button>
+    </div>
+</div>
+
+<ul class="decision-item-list">
     @foreach (var option in AppModel.Decision.Options.Items)
     {
         <DecisionItem @key="@option" Item="@option" OnDelete="@( () => AppModel.Decision.Options.Remove(option))" />
     }
 </ul>
 
-<div class="input-group mb-3 input-group-container">
-    <input type="text" class="form-control" @bind="newOptionInput" @onkeyup="OnNewItemKeyup"
-           placeholder="Add a criterion">
-    <div class="input-group-append">
-        <button class="btn btn-outline-secondary" @onclick="AddOption" type="button">Add</button>
-    </div>
-</div>
+<hr/>
 
 
 <div class="d-flex justify-content-between">
-    <NavLink class="d-btn" href="">&lt; Home</NavLink>
+    <NavLink class="d-btn" href="criteria">&lt; Back</NavLink>
     @if (AppModel.Decision.HasEnoughOptions)
     {
         <NavLink class="d-btn d-btn-primary" href="compare-options">Continue &gt;</NavLink>
@@ -51,11 +54,19 @@
         }
     }
 
-     private void OnNewItemKeyup(KeyboardEventArgs args)
+    private void OnNewItemKeyup(KeyboardEventArgs args)
     {
-        if(args.Key == "Enter")
+        if (args.Key == "Enter")
         {
             AddOption();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        if (!AppModel.Decision.HasEnoughCriteria)
+        {
+            NavigationManager.NavigateTo("/criteria");
         }
     }
 }

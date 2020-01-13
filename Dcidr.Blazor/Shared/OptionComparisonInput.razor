@@ -1,22 +1,20 @@
 ﻿@using Dcidr.Model;
 @inject DcidrAppModel AppModel
 
-    <div>
-        <p>Regarding <strong>@Item.Criterion</strong>,</p>
-        <p><strong>@Item.OptionOne</strong></p> is
+    <div  class="comparison-container">
+        <div>Regarding <strong>@Item.Criterion</strong>,</div>
+        <div><strong>@Item.OptionOne</strong> is</div>
 
         @foreach (var weightOption in allWeightOptions)
         {
             <button @onclick="@( () => SetWeight(weightOption.weight))" 
-                    class="@( 
+                    class=" btn btn-outline-secondary btn-block @( 
                         Item.Weight.HasValue && Item.Weight == weightOption.weight  ? "selected-weight-button" : ""
                         )"
                     >@weightOption.description</button>
         }
 
-        <p><strong>@Item.OptionTwo</strong></p>
-
-        <p>debug: @Item.Weight</p>
+        <div><strong>@Item.OptionTwo</strong></div>
     </div>
 
 @code {

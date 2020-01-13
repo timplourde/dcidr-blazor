@@ -10,13 +10,6 @@
     your criteria might be <strong>cost</strong> or <strong>travel time</strong>.</small>
 </p>
 
-<ul class="decision-item-list">
-    @foreach (var crit in AppModel.Decision.Criteria.Items)
-    {
-        <DecisionItem @key="crit" Item="@crit" OnDelete="@( (_) => AppModel.Decision.Criteria.Remove(crit))" />
-    }
-</ul>
-
 <div class="input-group mb-3 input-group-container">
     <input type="text" class="form-control" @bind="newCriteriaInput"
            placeholder="Add a criterion" @onkeyup="OnNewItemKeyup">
@@ -25,7 +18,14 @@
     </div>
 </div>
 
+<ul class="decision-item-list">
+    @foreach (var crit in AppModel.Decision.Criteria.Items)
+    {
+        <DecisionItem @key="crit" Item="@crit" OnDelete="@( (_) => AppModel.Decision.Criteria.Remove(crit))" />
+    }
+</ul>
 
+<hr/>
 
 <div class="d-flex justify-content-between">
     <NavLink class="d-btn" href="">&lt; Home</NavLink>

@@ -2,60 +2,79 @@
 @inject DcidrAppModel AppModel
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject NavigationManager NavigationManager
-@using Dcidr.Blazor.Shared
-@using System.Threading
+@inject IJSRuntime JSRuntime
 
 <h1>Results</h1>
 
-<p>
-    Decision Id @AppModel.Decision.Id
+<p class="mb-3">
+    <small><strong>All done!</strong>  Here's how your options are ranked based on your responses:</small>
 </p>
 
-<ul>
+<ol class="result-container mb-3">
     @foreach (var result in AppModel.Decision.Results)
     {
-        <li><strong>@result.Option</strong> : @result.Score.ToString("N2")</li>
+        <li>
+            <div class="result-bar"></div>
+            <div>
+                <strong>@result.Option</strong>
+                <small>@($"{result.Score.ToString("P2")}")</small>
+            </div>
+        </li>
     }
-</ul>
+</ol>
 
 <hr />
 
-<p>
-    @if (!showSaveDialog)
-    {
-        <button @onclick="ShowSave">Save</button>
-    }
-    else
-    {
-        <label for="decision-name">Name:</label> <input name="decision-name" maxlength="20" type="text" @bind="nameInput" />
-        <button disabled="@isLoading" @onclick="SaveAsync">Save</button>
-        <button @onclick="CancelSave">Cancel</button>
-    }
-</p>
+<div><strong>Save this decision to your device</strong></div>
+
+
+<div class="input-group mb-3 input-group-container">
+    <input type="text" class="form-control" name="decision-name" maxlength="20"
+           @bind="AppModel.Decision.Name"
+           @onkeyup="OnNameKeyup"
+           placeholder="Enter a name">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" disabled="@isLoading" @onclick="SaveAsync" type="button">Save</button>
+    </div>
+</div>
+
+<hr />
+
+<a class="d-btn" href="">Go home</a>
+
 
 @code {
     private bool showSaveDialog;
-    private string nameInput;
     private bool isLoading;
 
-    private void ShowSave()
+    protected override void OnInitialized()
     {
-        nameInput = AppModel.Decision.Name;
-        showSaveDialog = true;
+        if (!AppModel.Decision.ResultPrerequisitesMet)
+        {
+            NavigationManager.NavigateTo("/criteria");
+        }
     }
 
-    private void CancelSave()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        nameInput = string.Empty;
-        showSaveDialog = false;
+        var cssFriendlyWidthPercentages = AppModel.Decision.Results.Select(r => $"{(r.Score * 100).ToString("N0")}%").ToList();
+        await JSRuntime.InvokeVoidAsync("dcidr.interop.applyResultBarWidths", cssFriendlyWidthPercentages);
+    }
+
+
+    private async Task OnNameKeyup(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            await SaveAsync();
+        }
     }
 
     private async Task SaveAsync()
     {
-        if (string.IsNullOrWhiteSpace(nameInput) || nameInput.Length < 1) return;
+        if (string.IsNullOrWhiteSpace(AppModel.Decision.Name) || AppModel.Decision.Name.Length < 1) return;
 
         isLoading = true;
-        AppModel.Decision.Name = nameInput;
 
         var serializedDecision = AppModel.Decision.Serialize();
 
@@ -69,7 +88,7 @@
         };
 
         var archive = await localStorage.GetItemAsync<DecisionArchive>("decision-archive");
-        if(archive == null)
+        if (archive == null)
         {
             archive = new DecisionArchive();
         }

@@ -22,6 +22,24 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+
+    <script>
+        (function () {
+            window.dcidr = {
+                interop: {
+                    applyResultBarWidths(reportBarWidths) {
+                        if (!reportBarWidths) return;
+                        document.querySelectorAll(".result-bar").forEach((el, key) => {
+                            setTimeout(() => {
+                                el.setAttribute('style', 'width: ' + reportBarWidths[key]);
+                            }, 200 * key);
+                        });
+                    }
+                }
+            };
+        })();
+       
+    </script>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
 

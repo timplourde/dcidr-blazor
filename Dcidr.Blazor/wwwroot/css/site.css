@@ -100,8 +100,28 @@ main {
     cursor: pointer;
 }
 
+.comparison-container {
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    padding: .6rem;
+    margin-bottom: 1rem;
+}
+
 .selected-weight-button {
-    background-color: #69baef;
+    background-color: var(--primary-color);
+    color: white;
+    border-color: white;
+}
+
+.result-container li {
+    margin-bottom: .5rem;
+}
+.result-bar {
+    transform: skew(-20deg,0deg);
+    background: linear-gradient(to bottom,#8693f6 0, var(--primary-color) 100%);
+    height: 1rem;
+    transition: width 1s ease-out;
+    width: 1px;
 }
 
 /* buttons */
