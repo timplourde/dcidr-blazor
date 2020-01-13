@@ -8,7 +8,7 @@ namespace Dcidr.Blazor
 {
     public class DcidrAppModel
     {
-        public Decision Decision { get; set; }
+        public Decision Decision { get; set; } = new Decision();
 
         public void NewDecision()
         {

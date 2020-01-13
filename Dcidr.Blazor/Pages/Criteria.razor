@@ -1,31 +1,42 @@
 ﻿@page "/criteria"
 @inject DcidrAppModel AppModel
+@inject NavigationManager NavigationManager
 @using Dcidr.Blazor.Shared
 
-<h1>Criteria</h1>
+<h1>Enter your criteria</h1>
 
-<p>
-    Decision Id @AppModel.Decision.Id
+<p class="mb-3">
+    <small>For example, if you were planning a family vacation, 
+    your criteria might be <strong>cost</strong> or <strong>travel time</strong>.</small>
 </p>
 
-<ul>
+<ul class="decision-item-list">
     @foreach (var crit in AppModel.Decision.Criteria.Items)
     {
         <DecisionItem @key="crit" Item="@crit" OnDelete="@( (_) => AppModel.Decision.Criteria.Remove(crit))" />
     }
 </ul>
 
-<input type="text" @bind="newCriteriaInput"/>
+<div class="input-group mb-3 input-group-container">
+    <input type="text" class="form-control" @bind="newCriteriaInput"
+           placeholder="Add a criterion" @onkeyup="OnNewItemKeyup">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" @onclick="AddCriteria" type="button">Add</button>
+    </div>
+</div>
 
-<button @onclick="AddCriteria">Add</button>
 
-@if (AppModel.Decision.HasEnoughCriteria)
-{
-    <p>
-        <NavLink href="options">Next Step</NavLink>
-    </p>
-}
 
+<div class="d-flex justify-content-between">
+    <NavLink class="d-btn" href="">&lt; Home</NavLink>
+    @if (AppModel.Decision.HasEnoughCriteria)
+    {
+        <NavLink class="d-btn d-btn-primary" href="options">Continue &gt;</NavLink>
+    }
+</div>
+
+
+<DecisionDebug />
 
 @code {
 
@@ -37,6 +48,14 @@
         {
             AppModel.Decision.Criteria.Add(newCriteriaInput.Trim());
             newCriteriaInput = string.Empty;
+        }
+    }
+
+    private void OnNewItemKeyup(KeyboardEventArgs args)
+    {
+        if(args.Key == "Enter")
+        {
+            AddCriteria();
         }
     }
 }
