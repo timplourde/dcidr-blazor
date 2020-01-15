@@ -1,7 +1,6 @@
-﻿<li>
-    <strong>@Item.Name (@Item.DateCreatedUtc.ToShortDateString())</strong> 
-    <button @onclick="HandleDelete">Delete</button> 
-    <button @onclick="HandleLoad">Load</button>
+﻿<li class="decision-item d-flex justify-content-between">
+    <a href="" @onclick="HandleLoad"><strong>@Item.Name</strong> <small>(@Item.DateCreatedUtc.ToShortDateString())</small></a>
+    <div class="decicion-item-button" @onclick="HandleDelete" title="Delete">🗑️</div>
 </li>
 
 @code {

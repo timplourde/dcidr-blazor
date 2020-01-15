@@ -1,30 +1,45 @@
 ﻿@page "/options"
 @inject DcidrAppModel AppModel
 @using Dcidr.Blazor.Shared
+@inject NavigationManager NavigationManager
 
-<h1>Options</h1>
 
-<p>
-    Decision Id @AppModel.Decision.Id
+<h1>Enter your options</h1>
+
+<p class="mb-3">
+    <small>
+        For example, if you were planning a family vacation,
+        your options might be <strong>beach</strong> or <strong>camping</strong>.
+    </small>
 </p>
 
-<ul>
+<div class="input-group mb-3 input-group-container">
+    <input type="text" class="form-control" @bind="newOptionInput" @onkeyup="OnNewItemKeyup"
+           placeholder="Add an option">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" @onclick="AddOption" type="button">Add</button>
+    </div>
+</div>
+
+<ul class="decision-item-list">
     @foreach (var option in AppModel.Decision.Options.Items)
     {
         <DecisionItem @key="@option" Item="@option" OnDelete="@( () => AppModel.Decision.Options.Remove(option))" />
     }
 </ul>
 
-<input type="text" @bind="newOptionInput" />
+<hr/>
 
-<button @onclick="AddOption">Add</button>
 
-@if (AppModel.Decision.HasEnoughOptions)
-{
-    <p>
-        <NavLink href="compare-options">Next Step</NavLink>
-    </p>
-}
+<div class="d-flex justify-content-between">
+    <NavLink class="d-btn" href="criteria">&lt; Back</NavLink>
+    @if (AppModel.Decision.HasEnoughOptions)
+    {
+        <NavLink class="d-btn d-btn-primary" href="compare-options">Continue &gt;</NavLink>
+    }
+</div>
+
+<DecisionDebug />
 
 
 @code {
@@ -36,6 +51,22 @@
         {
             AppModel.Decision.Options.Add(newOptionInput.Trim());
             newOptionInput = String.Empty;
+        }
+    }
+
+    private void OnNewItemKeyup(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            AddOption();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        if (!AppModel.Decision.HasEnoughCriteria)
+        {
+            NavigationManager.NavigateTo("/criteria");
         }
     }
 }

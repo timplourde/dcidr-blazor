@@ -135,9 +135,9 @@ namespace Dcidr.Model.Tests
                 oc.SetWeight(Weight.GreaterThan);
             }
 
-            d.CriteriaComparisons.First(c => c.CriteriaOne == "c1" && c.CriteriaTwo == "c2").SetWeight(Weight.GreaterThan);
-            d.CriteriaComparisons.First(c => c.CriteriaOne == "c1" && c.CriteriaTwo == "c3").SetWeight(Weight.MuchGreaterThan);
-            d.CriteriaComparisons.First(c => c.CriteriaOne == "c2" && c.CriteriaTwo == "c3").SetWeight(Weight.MuchLessThan);
+            d.CriteriaComparisons.First(c => c.CriterionOne == "c1" && c.CriterionTwo == "c2").SetWeight(Weight.GreaterThan);
+            d.CriteriaComparisons.First(c => c.CriterionOne == "c1" && c.CriterionTwo == "c3").SetWeight(Weight.MuchGreaterThan);
+            d.CriteriaComparisons.First(c => c.CriterionOne == "c2" && c.CriterionTwo == "c3").SetWeight(Weight.MuchLessThan);
 
             Assert.IsTrue(d.ResultPrerequisitesMet);
 

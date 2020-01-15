@@ -1,26 +1,37 @@
 ﻿@page "/compare-options"
 @inject DcidrAppModel AppModel
 @using Dcidr.Blazor.Shared
+@inject NavigationManager NavigationManager
 
-<h1>Compare Options</h1>
+<h1>Compare options</h1>
 
-<p>
-    Decision Id @AppModel.Decision.Id
+<p class="mb-3">
+    <small>Complete each sentence.</small>
 </p>
-
 
 @foreach (var oc in AppModel.Decision.OptionComparisons)
 {
     <OptionComparisonInput @key="@oc.GetHashCode()" Item="@oc" WeightChanged="StateHasChanged" />
 }
 
-@if (AppModel.Decision.AllOptionComparisonsHaveWeights)
-{
-    <p>
-        <NavLink href="compare-criteria">Next Step</NavLink>
-    </p>
-}
+<hr/>
+
+<div class="d-flex justify-content-between">
+    <NavLink class="d-btn" href="options">&lt; Back</NavLink>
+    @if (AppModel.Decision.AllOptionComparisonsHaveWeights)
+    {
+        <NavLink class="d-btn d-btn-primary" href="compare-criteria">Continue &gt;</NavLink>
+    }
+</div>
+
+<DecisionDebug />
 
 @code {
-
+    protected override void OnInitialized()
+    {
+        if (!AppModel.Decision.HasEnoughCriteria)
+        {
+            NavigationManager.NavigateTo("/options");
+        }
+    }
 }

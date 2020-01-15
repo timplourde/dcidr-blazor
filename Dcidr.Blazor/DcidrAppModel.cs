@@ -8,15 +8,11 @@ namespace Dcidr.Blazor
 {
     public class DcidrAppModel
     {
-        public Decision Decision { get; set; }
+        public Decision Decision { get; set; } = new Decision();
 
         public void NewDecision()
         {
             Decision = new Decision();
-            Decision.Options.Add("o1");
-            Decision.Options.Add("o2");
-            Decision.Criteria.Add("c1");
-            Decision.Criteria.Add("c2");
         }
     }
 }

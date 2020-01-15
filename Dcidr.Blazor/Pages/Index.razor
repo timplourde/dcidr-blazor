@@ -2,15 +2,20 @@
 @inject DcidrAppModel AppModel
 @inject NavigationManager NavigationManager
 
-<h1>Hello, world!</h1>
+    <div class="text-center">
+        <h1>Complex decisions made easy.</h1>
 
-<p>
-    <button @onclick="NewDecision">New Decision</button>
-</p>
+        <p class="mb-4">Use this app to make any decision involving multiple <strong>options</strong> and <strong>criteria</strong>.  </p>
 
-<p>
-    <NavLink href="archive">Archive</NavLink>
-</p>
+        <p class="mb-2">
+            <button class="d-btn d-btn-primary" @onclick="NewDecision">New Decision</button>
+        </p>
+
+        <p>
+            <NavLink class="d-btn" href="archive">Archive</NavLink>
+        </p>
+
+    </div>
 
 
 @code {

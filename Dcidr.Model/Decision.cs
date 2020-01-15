@@ -76,8 +76,8 @@ namespace Dcidr.Model
             {
                 foreach (var scc in serializedDecision.CriteriaComparisons)
                 {
-                    var cc = d.CriteriaComparisons.FirstOrDefault(dcc => dcc.CriteriaOne == scc.CriteriaOne
-                        && dcc.CriteriaTwo == scc.CriteriaTwo);
+                    var cc = d.CriteriaComparisons.FirstOrDefault(dcc => dcc.CriterionOne == scc.CriterionOne
+                        && dcc.CriterionTwo == scc.CriterionTwo);
                     if (cc != null && scc.Weight.HasValue)
                     {
                         cc.SetWeight(scc.Weight.Value);
@@ -99,8 +99,8 @@ namespace Dcidr.Model
                 Criteria = Criteria.Items.ToArray(),
                 CriteriaComparisons = CriteriaComparisons.Select(cc => new SerializedCriteriaComparison
                 {
-                    CriteriaOne = cc.CriteriaOne,
-                    CriteriaTwo = cc.CriteriaTwo,
+                    CriterionOne = cc.CriterionOne,
+                    CriterionTwo = cc.CriterionTwo,
                     Weight = cc.Weight
                 }).ToArray(),
                 OptionComparisons = OptionComparisons.Select(oc => new SerializedOptionComparison
@@ -205,7 +205,7 @@ namespace Dcidr.Model
                 }
             }
 
-            CriteriaComparisons = CriteriaComparisons.OrderBy(c => c.CriteriaOne).ToList();
+            CriteriaComparisons = CriteriaComparisons.OrderBy(c => c.CriterionOne).ToList();
         }
     }
 }

@@ -8,28 +8,36 @@
 
 <h1>Archive</h1>
 
+<p>These decisions are saved on your device.</p>
+
 @if (!isLoading)
 {
     @if (showList)
     {
-        @foreach (var d in decisionArchive.Decisions)
-        {
-            <ArchiveItem @key="@d.Id" 
-                         Item="@d" 
-                         OnDelete="DeleteDecisionAsync" 
-                         OnLoad="LoadDecisionAsync"></ArchiveItem>
-        }
+        <ul class="decision-item-list">
+            @foreach (var d in decisionArchive.Decisions)
+            {
+                <ArchiveItem @key="@d.Id"
+                             Item="@d"
+                             OnDelete="DeleteDecisionAsync"
+                             OnLoad="LoadDecisionAsync"></ArchiveItem>
+            }
+        </ul>
+        
     }
     else
     {
-        <em>No archived decisions</em>
+        <em>No decisions found.</em>
     }
 }
 else
 {
-    <h3>Loading...</h3>
+    <em>Loading...</em>
 }
 
+<hr/>
+
+<a class="d-btn" href="">Go home</a>
 
 @code {
 

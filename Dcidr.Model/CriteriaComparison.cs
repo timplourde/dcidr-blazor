@@ -6,14 +6,14 @@ namespace Dcidr.Model
 {
     public class CriteriaComparison
     {
-        public CriteriaComparison(string criteriaOne, string criteriaTwo)
+        public CriteriaComparison(string criterionOne, string criterionTwo)
         {
-            CriteriaOne = criteriaOne;
-            CriteriaTwo = criteriaTwo;
+            CriterionOne = criterionOne;
+            CriterionTwo = criterionTwo;
         }
 
-        public string CriteriaOne { get; }
-        public string CriteriaTwo { get; }
+        public string CriterionOne { get; }
+        public string CriterionTwo { get; }
         public Weight? Weight { get; private set; }
         public event EventHandler OnWeightChange;
 
@@ -26,8 +26,8 @@ namespace Dcidr.Model
         public override int GetHashCode()
         {
             var hashCode = 240112566;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CriteriaOne);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CriteriaTwo);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CriterionOne);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CriterionTwo);
             return hashCode;
         }
     }
