@@ -9,6 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dcidr.Blazor", "Dcidr.Blazo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dcidr.Model.Tests", "Dcidr.Model.Tests\Dcidr.Model.Tests.csproj", "{FC1F182D-3E0F-403A-B589-3DE69CB7DEFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dcidr.Excel", "Dcidr.Excel\Dcidr.Excel.csproj", "{D701E8EE-E516-420F-8FCE-467EF1A166AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dcidr.Excel.Tests", "Dcidr.Excel.Tests\Dcidr.Excel.Tests.csproj", "{D28A8DB5-83DF-4D04-9B2F-2423A03E468E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A39D8AE4-0122-4835-9A76-96D8CEB369DD}"
+	ProjectSection(SolutionItems) = preProject
+		data\decisionmatrix.xlsx = data\decisionmatrix.xlsx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +36,14 @@ Global
 		{FC1F182D-3E0F-403A-B589-3DE69CB7DEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC1F182D-3E0F-403A-B589-3DE69CB7DEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC1F182D-3E0F-403A-B589-3DE69CB7DEFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D701E8EE-E516-420F-8FCE-467EF1A166AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D701E8EE-E516-420F-8FCE-467EF1A166AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D701E8EE-E516-420F-8FCE-467EF1A166AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D701E8EE-E516-420F-8FCE-467EF1A166AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D28A8DB5-83DF-4D04-9B2F-2423A03E468E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D28A8DB5-83DF-4D04-9B2F-2423A03E468E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D28A8DB5-83DF-4D04-9B2F-2423A03E468E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D28A8DB5-83DF-4D04-9B2F-2423A03E468E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
