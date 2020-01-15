@@ -32,7 +32,7 @@ namespace Dcidr.Model
             // add inverses
             var inverseCriteriaComparisons = criteriaComparisons.Select(cc =>
             {
-                var inverseCc = new CriteriaComparison(cc.CriteriaTwo, cc.CriteriaOne);
+                var inverseCc = new CriteriaComparison(cc.CriterionTwo, cc.CriterionOne);
                 inverseCc.SetWeight(GetInverseWeight(cc.Weight.Value));
                 return inverseCc;
             }).ToList();
@@ -41,7 +41,7 @@ namespace Dcidr.Model
             var totalCritCompWeight = criteriaComparisons.Sum(cc => GetWeightFactor(cc.Weight.Value));
 
             // build RDVs for each criterion
-            var criteriaRdvs = criteriaComparisons.GroupBy(c => c.CriteriaOne).Select(g =>
+            var criteriaRdvs = criteriaComparisons.GroupBy(c => c.CriterionOne).Select(g =>
                 new
                 {
                     Criteria = g.Key,

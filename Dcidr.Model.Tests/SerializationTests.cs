@@ -21,8 +21,8 @@ namespace Dcidr.Model.Tests
                 {
                     new SerializedCriteriaComparison
                     {
-                        CriteriaOne = "c1",
-                        CriteriaTwo = "c2",
+                        CriterionOne = "c1",
+                        CriterionTwo = "c2",
                         Weight = Weight.GreaterThan
                     }
                 },
@@ -52,8 +52,8 @@ namespace Dcidr.Model.Tests
             Assert.AreEqual(serializedDecision.DateCreatedUtc, d.DateCreatedUtc); 
             CollectionAssert.AreEqual(new[] { "c1", "c2" }, d.Criteria.Items.ToArray());
             CollectionAssert.AreEqual(new[] { "o1", "o2" }, d.Options.Items.ToArray());
-            d.CriteriaComparisons.Single(cc => cc.CriteriaOne == "c1"
-                && cc.CriteriaTwo == "c2"
+            d.CriteriaComparisons.Single(cc => cc.CriterionOne == "c1"
+                && cc.CriterionTwo == "c2"
                 && cc.Weight == Weight.GreaterThan);
             d.OptionComparisons.Single(cc => cc.Criterion == "c1"
                 && cc.OptionOne == "o1"
@@ -116,7 +116,7 @@ namespace Dcidr.Model.Tests
             CollectionAssert.AreEqual(new[]
             {
                 ("c1", "c2", Weight.LessThan)
-            }, sd.CriteriaComparisons.Select(cc => (cc.CriteriaOne, cc.CriteriaTwo, cc.Weight.Value)).ToArray());
+            }, sd.CriteriaComparisons.Select(cc => (cc.CriterionOne, cc.CriterionTwo, cc.Weight.Value)).ToArray());
         }
     }
 }
