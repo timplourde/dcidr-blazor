@@ -86,24 +86,7 @@ namespace Dcidr.Model
             return adjustedOptionCriteriaRdvs;
         }
 
-        private static decimal GetWeightFactor(Weight weight)
-        {
-            switch (weight)
-            {
-                case Weight.MuchLessThan:
-                    return 0.1m;
-                case Weight.LessThan:
-                    return 0.2m;
-                case Weight.AboutEqualTo:
-                    return 1m;
-                case Weight.GreaterThan:
-                    return 5m;
-                case Weight.MuchGreaterThan:
-                    return 10m;
-                default:
-                    throw new ArgumentException(nameof(weight));
-            }
-        }
+        private static decimal GetWeightFactor(Weight weight) => weight.ToRatio();
 
         private static Weight GetInverseWeight(Weight weight)
         {

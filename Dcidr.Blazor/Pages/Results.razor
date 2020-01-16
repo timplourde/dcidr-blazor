@@ -3,6 +3,8 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
+@using Dcidr.Blazor.Extensions
+@using Dcidr.Excel
 
 <h1>Results</h1>
 
@@ -37,6 +39,10 @@
         <button class="btn btn-outline-secondary" disabled="@isLoading" @onclick="SaveAsync" type="button">Save</button>
     </div>
 </div>
+<hr />
+
+<button class="d-btn" @onclick="DownloadExcelFile">Download Excel File</button>
+
 
 <hr />
 
@@ -44,7 +50,6 @@
 
 
 @code {
-    private bool showSaveDialog;
     private bool isLoading;
 
     protected override void OnInitialized()
@@ -58,7 +63,7 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         var cssFriendlyWidthPercentages = AppModel.Decision.Results.Select(r => $"{(r.Score * 100).ToString("N0")}%").ToList();
-        await JSRuntime.InvokeVoidAsync("dcidr.interop.applyResultBarWidths", cssFriendlyWidthPercentages);
+        await JSRuntime.InvokeVoidAsync("dcidr.interop.applyResultBarWidths", ".result-bar", cssFriendlyWidthPercentages);
     }
 
 
@@ -101,5 +106,11 @@
 
         NavigationManager.NavigateTo("/");
 
+    }
+
+    private void DownloadExcelFile()
+    {
+        var excelBytes = ExcelExporter.GenerateExcel(AppModel.Decision);
+        JSRuntime.SaveAs($"{AppModel.Decision.Id}.xlsx", excelBytes);
     }
 }
