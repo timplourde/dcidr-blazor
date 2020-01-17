@@ -110,7 +110,7 @@ namespace Dcidr.Excel
 
                 // RDV column formula
                 var optionRdvCellAddress = new ExcelCellAddress(2 + i, 3 + totalOptions);
-                optionRdvCellAddresses.Add(option, $"{criterion}!{optionRdvCellAddress.Address}");
+                optionRdvCellAddresses.Add(option, $"'{criterion}'!{optionRdvCellAddress.Address}");
                 sheet.Cells[optionRdvCellAddress.Address].Formula = $"{totalCellAddress.Address}/{grandTotalCellAddress.Address}";
             }
 
@@ -179,7 +179,7 @@ namespace Dcidr.Excel
 
                 // RDV column formula
                 var criteriaRdvAddress = new ExcelCellAddress(2 + i, 3 + totalCriteria);
-                criteriaRdvCellAddresses.Add(crit, $"{sheetTitle}!{criteriaRdvAddress.Address}");
+                criteriaRdvCellAddresses.Add(crit, $"'{sheetTitle}'!{criteriaRdvAddress.Address}");
                 sheet.Cells[criteriaRdvAddress.Address].Formula = $"{totalCellAddress.Address}/{grandTotalCellAddress.Address}";
             }
 
