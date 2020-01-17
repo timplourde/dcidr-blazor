@@ -9,18 +9,21 @@
     <small>Complete each sentence.</small>
 </p>
 
-@foreach (var oc in AppModel.Decision.OptionComparisons)
-{
-    <OptionComparisonInput @key="@oc.GetHashCode()" Item="@oc" WeightChanged="StateHasChanged" />
-}
+<div class="comparison-container-list d-flex flex-wrap ">
+    @foreach (var oc in AppModel.Decision.OptionComparisons)
+    {
+        <OptionComparisonInput @key="@oc.GetHashCode()" Item="@oc" WeightChanged="StateHasChanged" />
+    }
+</div>
+
 
 <hr/>
 
-<div class="d-flex justify-content-between">
-    <NavLink class="d-btn" href="options">&lt; Back</NavLink>
+<div class="d-flex justify-content-between  mb-3">
+    <NavLink class="d-btn" href="options">&lt;&nbsp;Back</NavLink>
     @if (AppModel.Decision.AllOptionComparisonsHaveWeights)
     {
-        <NavLink class="d-btn d-btn-primary" href="compare-criteria">Continue &gt;</NavLink>
+        <NavLink class="d-btn d-btn-primary" href="compare-criteria">Continue&nbsp;&gt;</NavLink>
     }
 </div>
 

@@ -8,13 +8,13 @@
         @foreach (var weightOption in allWeightOptions)
         {
             <button @onclick="@( () => SetWeight(weightOption.weight))" 
-                    class="btn btn-outline-secondary btn-block @( 
-                        Item.Weight.HasValue && Item.Weight == weightOption.weight  ? "selected-weight-button" : ""
+                    class="btn weight-button @( 
+                        Item.Weight.HasValue && Item.Weight == weightOption.weight  ? "weight-button-selected" : ""
                         )"
                     >@weightOption.description</button>
         }
 
-        <div><strong>@Item.CriterionTwo</strong></div>
+        <div><strong>@($"{Item.CriterionTwo}.")</strong></div>
     </div>
 
 @code {

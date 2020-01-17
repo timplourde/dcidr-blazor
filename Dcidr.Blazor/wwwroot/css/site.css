@@ -102,16 +102,18 @@ main {
 
 .comparison-container {
     border-radius: 10px;
+    border: 1px solid rgb(187,187,187);
     background-color: #f4f4f4;
     padding: .6rem;
-    margin-bottom: 1rem;
+    margin: 1rem;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .comparison-container {
+        width: 45%;
+    }
 }
 
-.selected-weight-button {
-    background-color: var(--primary-color);
-    color: white;
-    border-color: white;
-}
 
 .result-container li {
     margin-bottom: .5rem;
@@ -125,6 +127,17 @@ main {
 }
 
 /* buttons */
+.big-juicy {
+    padding: 1.8rem;
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
 .d-btn {
     color: black;
     display: block;
@@ -166,6 +179,21 @@ main {
 .d-btn-primary:hover {
     color: white;
 }
+.weight-button {
+    display: block;
+    width: 100%;
+    margin-bottom: .5rem;
+    border-radius: 10px;
+    border: 1px solid rgb(187,187,187);
+    color: rgb(66, 66, 66);
+    text-align: center;
+}
+
+    .weight-button:active, .weight-button-selected, .weight-button-selected:active, .weight-button-selected:hover {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: white;
+    }
 
 
 /* loading screen */

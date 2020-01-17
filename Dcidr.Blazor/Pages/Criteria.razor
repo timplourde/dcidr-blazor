@@ -14,7 +14,7 @@
     <input type="text" class="form-control" @bind="newCriteriaInput"
            placeholder="Add a criterion" @onkeyup="OnNewItemKeyup">
     <div class="input-group-append">
-        <button class="btn btn-outline-secondary" @onclick="AddCriteria" type="button">Add</button>
+        <button class="btn btn-primary" @onclick="AddCriteria" type="button">Add</button>
     </div>
 </div>
 
@@ -27,11 +27,11 @@
 
 <hr/>
 
-<div class="d-flex justify-content-between">
-    <NavLink class="d-btn" href="">&lt; Home</NavLink>
+<div class="d-flex justify-content-between  mb-3">
+    <NavLink class="d-btn" href="">&lt;&nbsp;Home</NavLink>
     @if (AppModel.Decision.HasEnoughCriteria)
     {
-        <NavLink class="d-btn d-btn-primary" href="options">Continue &gt;</NavLink>
+        <NavLink class="d-btn d-btn-primary" href="options">Continue&nbsp;&gt;</NavLink>
     }
 </div>
 

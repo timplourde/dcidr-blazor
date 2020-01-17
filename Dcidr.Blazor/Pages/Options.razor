@@ -17,7 +17,7 @@
     <input type="text" class="form-control" @bind="newOptionInput" @onkeyup="OnNewItemKeyup"
            placeholder="Add an option">
     <div class="input-group-append">
-        <button class="btn btn-outline-secondary" @onclick="AddOption" type="button">Add</button>
+        <button class="btn btn-primary" @onclick="AddOption" type="button">Add</button>
     </div>
 </div>
 
@@ -31,11 +31,11 @@
 <hr/>
 
 
-<div class="d-flex justify-content-between">
-    <NavLink class="d-btn" href="criteria">&lt; Back</NavLink>
+<div class="d-flex justify-content-between  mb-3">
+    <NavLink class="d-btn" href="criteria">&lt;&nbsp;Back</NavLink>
     @if (AppModel.Decision.HasEnoughOptions)
     {
-        <NavLink class="d-btn d-btn-primary" href="compare-options">Continue &gt;</NavLink>
+        <NavLink class="d-btn d-btn-primary" href="compare-options">Continue&nbsp;&gt;</NavLink>
     }
 </div>
 
