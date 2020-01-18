@@ -122,7 +122,7 @@ main {
 .result-bar {
     transform: skew(-20deg,0deg);
     background: linear-gradient(to bottom,#8693f6 0, var(--primary-color) 100%);
-    height: 1rem;
+    height: 1.4rem;
     transition: width 1s ease-out;
     width: 1px;
 }

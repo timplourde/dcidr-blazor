@@ -10,14 +10,14 @@
 
             For example, if you were planning a family vacation,
             your options might be <strong>beach</strong> or <strong>camping</strong>.
-            We recommend no more than five options.
+            Five or fewer options is ideal.
 
         </p>
 
-        <hr/>
+        <hr />
 
         <div class="input-group mb-3 input-group-container">
-            <input type="text" class="form-control" @bind="newOptionInput" @onkeyup="OnNewItemKeyup"
+            <input type="text" class="form-control" @bind="newOptionInput" @onkeyup="OnNewItemKeyup" maxlength="50"
                    placeholder="Add an option">
             <div class="input-group-append">
                 <button class="btn btn-secondary" @onclick="AddOption" type="button" title="Add">
@@ -28,12 +28,23 @@
             </div>
         </div>
 
-        <ul class="decision-item-list">
-            @foreach (var option in AppModel.Decision.Options.Items)
-            {
-                <DecisionItem @key="@option" Item="@option" OnDelete="@( () => AppModel.Decision.Options.Remove(option))" />
-            }
-        </ul>
+
+        @if (AppModel.Decision.Criteria.Items.Count() == 0)
+        {
+            <div class="p-1">
+                <em>At least two options are required to proceed.</em>
+            </div>
+        }
+        else
+        {
+            <ul class="decision-item-list">
+                @foreach (var option in AppModel.Decision.Options.Items)
+                {
+                    <DecisionItem @key="@option" Item="@option" OnDelete="@( () => AppModel.Decision.Options.Remove(option))" />
+                }
+            </ul>
+        }
+
 
         <hr />
 

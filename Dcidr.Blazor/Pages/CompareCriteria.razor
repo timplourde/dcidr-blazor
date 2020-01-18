@@ -20,6 +20,14 @@
 
         <hr />
 
+        <div class="mb-2 text-center">
+            <small>
+                @AppModel.Decision.CriteriaComparisons.Count(oc => oc.Weight != null)
+                / @AppModel.Decision.CriteriaComparisons.Count
+                sentences are complete
+            </small>
+        </div>
+
         <div class="d-flex justify-content-between mb-3">
 
             <NavLink class="d-btn" href="compare-options" title="Back">

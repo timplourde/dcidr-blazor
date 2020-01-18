@@ -20,7 +20,7 @@
             <li>
                 <div class="result-bar"></div>
                 <div>
-                    <strong>@result.Option</strong>
+                    <strong>@result.Option</strong> - 
                     <small>@($"{result.Score.ToString("P2")}")</small>
                 </div>
             </li>
@@ -29,7 +29,7 @@
 
     <hr />
 
-    <p>This calculation was done by using a prioritization matrix.  See how the math works by exporting to Excel.</p>
+    <p>This calculation was done by using a prioritization matrix.  See how the math works by exporting to Excel.  Click "enable editing" if prompted.</p>
 
     <button class="btn btn-secondary" @onclick="DownloadExcelFile" title="Download Excel File">
         <img src="images/download.svg" />
