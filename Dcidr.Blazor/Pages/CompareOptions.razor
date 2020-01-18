@@ -8,7 +8,7 @@
         <h1>Compare options</h1>
 
         <p class="mb-3">
-            Complete each sentence.
+            Complete these @(AppModel.Decision.OptionComparisons.Count) sentences.
         </p>
 
         <div class="comparison-container-list d-flex flex-wrap ">
@@ -35,6 +35,14 @@
                     <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
                 </NavLink>
             }
+            else
+            {
+                <div class="pt-1">
+                        @AppModel.Decision.OptionComparisons.Count(oc => oc.Weight == null)
+                        / @AppModel.Decision.OptionComparisons.Count
+                    complete
+                </div>
+            }
         </div>
 
         <DecisionDebug />
@@ -42,6 +50,7 @@
 
 
 @code {
+
     protected override void OnInitialized()
     {
         if (!AppModel.Decision.HasEnoughOptions || !AppModel.Decision.HasEnoughCriteria)

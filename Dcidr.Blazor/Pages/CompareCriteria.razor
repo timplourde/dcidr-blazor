@@ -8,7 +8,7 @@
         <h1>Compare criteria</h1>
 
         <p class="mb-3">
-            Complete each sentence.
+            Complete @AppModel.Decision.CriteriaComparisons.Count sentences.
         </p>
 
         <div class="comparison-container-list d-flex flex-wrap ">
@@ -31,6 +31,14 @@
                 <NavLink class="d-btn d-btn-primary" title="View Results" href="results">
                     View Results <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
                 </NavLink>
+            }
+            else
+            {
+                <div class="pt-1">
+                    @AppModel.Decision.CriteriaComparisons.Count(oc => oc.Weight == null)
+                    / @AppModel.Decision.CriteriaComparisons.Count
+                    complete
+                </div>
             }
         </div>
 
