@@ -3,54 +3,56 @@
 @using Dcidr.Blazor.Shared
 @inject NavigationManager NavigationManager
 
+    <div class="fade-in">
+        <h1>Enter your options</h1>
 
-<h1>Enter your options</h1>
+        <p class="mb-3">
 
-<p class="mb-3">
-   
-        For example, if you were planning a family vacation,
-        your options might be <strong>beach</strong> or <strong>camping</strong>.
- 
-</p>
+            For example, if you were planning a family vacation,
+            your options might be <strong>beach</strong> or <strong>camping</strong>.
 
-<div class="input-group mb-3 input-group-container">
-    <input type="text" class="form-control" @bind="newOptionInput" @onkeyup="OnNewItemKeyup"
-           placeholder="Add an option">
-    <div class="input-group-append">
-        <button class="btn btn-secondary" @onclick="AddOption" type="button" title="Add">
+        </p>
 
-            <img src="images/plus-circle.svg" />
+        <div class="input-group mb-3 input-group-container">
+            <input type="text" class="form-control" @bind="newOptionInput" @onkeyup="OnNewItemKeyup"
+                   placeholder="Add an option">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" @onclick="AddOption" type="button" title="Add">
 
-        </button>
+                    <img src="images/plus-circle.svg" />
+
+                </button>
+            </div>
+        </div>
+
+        <ul class="decision-item-list">
+            @foreach (var option in AppModel.Decision.Options.Items)
+            {
+                <DecisionItem @key="@option" Item="@option" OnDelete="@( () => AppModel.Decision.Options.Remove(option))" />
+            }
+        </ul>
+
+        <hr />
+
+
+        <div class="d-flex justify-content-between  mb-3">
+
+            <NavLink class="d-btn" href="criteria" title="Back">
+                <img src="images/arrow-left.svg" />
+                Back
+            </NavLink>
+
+            @if (AppModel.Decision.HasEnoughOptions)
+            {
+                <NavLink class="d-btn d-btn-primary" title="Continue" href="compare-options">
+                    Continue <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
+                </NavLink>
+            }
+        </div>
+
+        <DecisionDebug />
     </div>
-</div>
 
-<ul class="decision-item-list">
-    @foreach (var option in AppModel.Decision.Options.Items)
-    {
-        <DecisionItem @key="@option" Item="@option" OnDelete="@( () => AppModel.Decision.Options.Remove(option))" />
-    }
-</ul>
-
-<hr/>
-
-
-<div class="d-flex justify-content-between  mb-3">
-
-    <NavLink class="d-btn" href="criteria" title="Back">
-        <img src="images/arrow-left.svg"/>
-        Back
-    </NavLink>
-
-    @if (AppModel.Decision.HasEnoughOptions)
-    {
-        <NavLink class="d-btn d-btn-primary" title="Continue" href="compare-options">
-            Continue <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
-        </NavLink>
-    }
-</div>
-
-<DecisionDebug />
 
 
 @code {

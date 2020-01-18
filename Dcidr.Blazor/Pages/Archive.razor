@@ -5,39 +5,41 @@
 @inject NavigationManager NavigationManager
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 
+    <div class="fade-in">
+        <h1>Archive</h1>
 
-<h1>Archive</h1>
+        <p>These decisions are saved on your device.</p>
 
-<p>These decisions are saved on your device.</p>
-
-@if (!isLoading)
-{
-    @if (showList)
-    {
-        <ul class="decision-item-list">
-            @foreach (var d in decisionArchive.Decisions)
+        @if (!isLoading)
+        {
+            @if (showList)
             {
-                <ArchiveItem @key="@d.Id"
-                             Item="@d"
-                             OnDelete="DeleteDecisionAsync"
-                             OnLoad="LoadDecisionAsync"></ArchiveItem>
+                <ul class="decision-item-list">
+                    @foreach (var d in decisionArchive.Decisions)
+                    {
+                        <ArchiveItem @key="@d.Id"
+                                     Item="@d"
+                                     OnDelete="DeleteDecisionAsync"
+                                     OnLoad="LoadDecisionAsync"></ArchiveItem>
+                    }
+                </ul>
+
             }
-        </ul>
-        
-    }
-    else
-    {
-        <em >No decisions found.</em>
-    }
-}
-else
-{
-    <em>Loading...</em>
-}
+            else
+            {
+                <em>No decisions found.</em>
+            }
+        }
+        else
+        {
+            <em>Loading...</em>
+        }
 
-<hr/>
+        <hr />
 
-<a class="d-btn" href="">Go home</a>
+        <a class="d-btn" href="">Go home</a>
+    </div>
+
 
 @code {
 

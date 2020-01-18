@@ -3,39 +3,43 @@
 @using Dcidr.Blazor.Shared
 @inject NavigationManager NavigationManager
 
-<h1>Compare options</h1>
+    <div class="fade-in">
 
-<p class="mb-3">
-    Complete each sentence.
-</p>
+        <h1>Compare options</h1>
 
-<div class="comparison-container-list d-flex flex-wrap ">
-    @foreach (var oc in AppModel.Decision.OptionComparisons)
-    {
-        <OptionComparisonInput @key="@oc.GetHashCode()" Item="@oc" WeightChanged="StateHasChanged" />
-    }
-</div>
+        <p class="mb-3">
+            Complete each sentence.
+        </p>
+
+        <div class="comparison-container-list d-flex flex-wrap ">
+            @foreach (var oc in AppModel.Decision.OptionComparisons)
+            {
+                <OptionComparisonInput @key="@oc.GetHashCode()" Item="@oc" WeightChanged="StateHasChanged" />
+            }
+        </div>
 
 
-<hr/>
+        <hr />
 
-<div class="d-flex justify-content-between  mb-3">
+        <div class="d-flex justify-content-between  mb-3">
 
-    <NavLink class="d-btn" href="options" title="Back">
-        <img src="images/arrow-left.svg" />
-        Back
-    </NavLink>
-    
-    @if (AppModel.Decision.AllOptionComparisonsHaveWeights)
-    {
-        <NavLink class="d-btn d-btn-primary" href="compare-criteria" title="Continue">
-            Continue
-            <Dcidr.Blazor.Shared.InlineSvg.ArrowRight/>
-    </NavLink>
-    }
-</div>
+            <NavLink class="d-btn" href="options" title="Back">
+                <img src="images/arrow-left.svg" />
+                Back
+            </NavLink>
 
-<DecisionDebug />
+            @if (AppModel.Decision.AllOptionComparisonsHaveWeights)
+            {
+                <NavLink class="d-btn d-btn-primary" href="compare-criteria" title="Continue">
+                    Continue
+                    <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
+                </NavLink>
+            }
+        </div>
+
+        <DecisionDebug />
+    </div>
+
 
 @code {
     protected override void OnInitialized()

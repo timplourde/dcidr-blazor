@@ -6,68 +6,69 @@
 @using Dcidr.Blazor.Extensions
 @using Dcidr.Excel
 
-<h1>Results</h1>
+<div class="fade-in">
 
-<p class="mb-3">
-    <strong>All done!</strong>  Here's how your options are ranked based on your responses:
-</p>
+    <h1>Results</h1>
 
-<ol class="result-container mb-3">
-    @foreach (var result in AppModel.Decision.Results)
-    {
-        <li>
-            <div class="result-bar"></div>
-            <div>
-                <strong>@result.Option</strong>
-                <small>@($"{result.Score.ToString("P2")}")</small>
-            </div>
-        </li>
-    }
-</ol>
+    <p class="mb-3">
+        <strong>All done!</strong>  Here's how your options are ranked based on your responses:
+    </p>
 
-<hr />
+    <ol class="result-container mb-3">
+        @foreach (var result in AppModel.Decision.Results)
+        {
+            <li>
+                <div class="result-bar"></div>
+                <div>
+                    <strong>@result.Option</strong>
+                    <small>@($"{result.Score.ToString("P2")}")</small>
+                </div>
+            </li>
+        }
+    </ol>
 
-<p>This calculation was done by using a prioritization matrix.  See how the math works by exporting to Excel.</p>
+    <hr />
 
-<button class="btn btn-secondary" @onclick="DownloadExcelFile" title="Download Excel File">
-    <img src="images/download.svg" />
-    Download Excel File
-</button>
+    <p>This calculation was done by using a prioritization matrix.  See how the math works by exporting to Excel.</p>
 
-
-<hr />
-
-<p>Save this decision to your device if you want to review it in the future.</p>
+    <button class="btn btn-secondary" @onclick="DownloadExcelFile" title="Download Excel File">
+        <img src="images/download.svg" />
+        Download Excel File
+    </button>
 
 
-<div class="input-group mb-3 input-group-container">
-    <input type="text" class="form-control" name="decision-name" maxlength="20"
-           @bind="AppModel.Decision.Name"
-           @onkeyup="OnNameKeyup"
-           placeholder="Enter a name">
-    <div class="input-group-append">
-        <button class="btn btn-secondary" disabled="@isLoading" @onclick="SaveAsync" type="button" title="Save">
-            <img src="images/save.svg" />
-            Save
-        </button>
+    <hr />
+
+    <p>Save this decision to your device if you want to review it in the future.</p>
+
+
+    <div class="input-group mb-3 input-group-container">
+        <input type="text" class="form-control" name="decision-name" maxlength="20"
+                @bind="AppModel.Decision.Name"
+                @onkeyup="OnNameKeyup"
+                placeholder="Enter a name">
+        <div class="input-group-append">
+            <button class="btn btn-secondary" disabled="@isLoading" @onclick="SaveAsync" type="button" title="Save">
+                <img src="images/save.svg" />
+                Save
+            </button>
+        </div>
     </div>
+
+
+    <hr />
+
+    <div class="d-flex justify-content-between mb-3">
+
+        <NavLink class="d-btn" href="compare-criteria" title="Back">
+            <img src="images/arrow-left.svg" /> Back
+        </NavLink>
+
+        <NavLink class="d-btn" href="" title="Home"><img src="images/home.svg" /> Home</NavLink>
+
+    </div>
+
 </div>
-
-
-<hr />
-
-<div class="d-flex justify-content-between mb-3">
-
-    <NavLink class="d-btn" href="compare-criteria" title="Back">
-        <img src="images/arrow-left.svg" /> Back
-    </NavLink>
-
-    <NavLink class="d-btn" href="" title="Home"><img src="images/home.svg" /> Home</NavLink>
-
-</div>
-
-    
-
 
 @code {
     private bool isLoading;

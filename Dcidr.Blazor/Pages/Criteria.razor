@@ -3,49 +3,54 @@
 @inject NavigationManager NavigationManager
 @using Dcidr.Blazor.Shared
 
-<h1>Enter your criteria</h1>
+    <div class="fade-in">
 
-<p class="mb-3">
-    For example, if you were planning a family vacation, 
-    your criteria might be <strong>cost</strong> or <strong>travel time</strong>.
-</p>
+        <h1>Enter your criteria</h1>
 
-<div class="input-group mb-3 input-group-container">
-    <input type="text" class="form-control" @bind="newCriteriaInput"
-           placeholder="Add a criterion" @onkeyup="OnNewItemKeyup">
-    <div class="input-group-append">
-        <button class="btn btn-secondary" @onclick="AddCriteria" type="button" title="Add">
-            <img src="images/plus-circle.svg" />
-        </button>
+        <p class="mb-3">
+            For example, if you were planning a family vacation,
+            your criteria might be <strong>cost</strong> or <strong>travel time</strong>.
+        </p>
+
+        <div class="input-group mb-3 input-group-container">
+            <input type="text" class="form-control" @bind="newCriteriaInput"
+                   placeholder="Add a criterion" @onkeyup="OnNewItemKeyup">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" @onclick="AddCriteria" type="button" title="Add">
+                    <img src="images/plus-circle.svg" />
+                </button>
+            </div>
+        </div>
+
+        <ul class="decision-item-list">
+            @foreach (var crit in AppModel.Decision.Criteria.Items)
+            {
+                <DecisionItem @key="crit" Item="@crit" OnDelete="@( (_) => AppModel.Decision.Criteria.Remove(crit))" />
+            }
+        </ul>
+
+        <hr />
+
+        <div class="d-flex justify-content-between  mb-3">
+            <NavLink class="d-btn" href="" title="Home">
+                <img src="images/arrow-left.svg" />
+                Home
+            </NavLink>
+
+            @if (AppModel.Decision.HasEnoughCriteria)
+            {
+                <NavLink class="d-btn d-btn-primary" title="Continue" href="options">
+                    Continue <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
+                </NavLink>
+            }
+
+        </div>
+
+
+        <DecisionDebug />
+
     </div>
-</div>
 
-<ul class="decision-item-list">
-    @foreach (var crit in AppModel.Decision.Criteria.Items)
-    {
-        <DecisionItem @key="crit" Item="@crit" OnDelete="@( (_) => AppModel.Decision.Criteria.Remove(crit))" />
-    }
-</ul>
-
-<hr/>
-
-<div class="d-flex justify-content-between  mb-3">
-    <NavLink class="d-btn" href="" title="Home">
-    <img src="images/arrow-left.svg" />
-        Home
-    </NavLink>
-    
-    @if (AppModel.Decision.HasEnoughCriteria)
-    {
-        <NavLink class="d-btn d-btn-primary" title="Continue" href="options">
-            Continue <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
-    </NavLink>
-    }
-
-</div>
-
-
-<DecisionDebug />
 
 @code {
 

@@ -128,6 +128,10 @@ main {
 }
 
 /* buttons */
+button img, button svg, a img, a svg {
+    margin-top: -3px;
+}
+
 .big-juicy {
     padding: 1.8rem;
     font-size: 1.3rem;
@@ -156,7 +160,6 @@ main {
     box-sizing: border-box;
     border: 0px;
     text-decoration: none;
-    text-transform: uppercase;
     font-weight: 400;
     background-color: var(--gray-color);
     box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
@@ -253,6 +256,25 @@ main {
     }
 }
 
+
+/* animations */
+.fade-in {
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.25s;
+}
+
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 
 /* blazor error */
 #blazor-error-ui {
