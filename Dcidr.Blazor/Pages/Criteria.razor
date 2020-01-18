@@ -6,15 +6,17 @@
 <h1>Enter your criteria</h1>
 
 <p class="mb-3">
-    <small>For example, if you were planning a family vacation, 
-    your criteria might be <strong>cost</strong> or <strong>travel time</strong>.</small>
+    For example, if you were planning a family vacation, 
+    your criteria might be <strong>cost</strong> or <strong>travel time</strong>.
 </p>
 
 <div class="input-group mb-3 input-group-container">
     <input type="text" class="form-control" @bind="newCriteriaInput"
            placeholder="Add a criterion" @onkeyup="OnNewItemKeyup">
     <div class="input-group-append">
-        <button class="btn btn-primary" @onclick="AddCriteria" type="button">Add</button>
+        <button class="btn btn-secondary" @onclick="AddCriteria" type="button" title="Add">
+            <img src="images/plus-circle.svg" />
+        </button>
     </div>
 </div>
 
@@ -28,11 +30,18 @@
 <hr/>
 
 <div class="d-flex justify-content-between  mb-3">
-    <NavLink class="d-btn" href="">&lt;&nbsp;Home</NavLink>
+    <NavLink class="d-btn" href="" title="Home">
+    <img src="images/arrow-left.svg" />
+        Home
+    </NavLink>
+    
     @if (AppModel.Decision.HasEnoughCriteria)
     {
-        <NavLink class="d-btn d-btn-primary" href="options">Continue&nbsp;&gt;</NavLink>
+        <NavLink class="d-btn d-btn-primary" title="Continue" href="options">
+            Continue <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
+    </NavLink>
     }
+
 </div>
 
 

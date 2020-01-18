@@ -95,6 +95,7 @@ main {
     background-color: #f4f4f4;
     padding: .6rem;
     margin-bottom: 1rem;
+    border: 1px solid rgb(187,187,187);
 }
 .decicion-item-button:hover {
     cursor: pointer;
@@ -130,7 +131,7 @@ main {
 .big-juicy {
     padding: 1.8rem;
     font-size: 1.3rem;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active {
@@ -138,7 +139,14 @@ main {
     color: white;
 }
 
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active {
+    background-color: var(--gray-color);
+    color: black;
+    border: 0;
+}
+
 .d-btn {
+    white-space: nowrap;
     color: black;
     display: block;
     width: 100%;
@@ -179,21 +187,22 @@ main {
 .d-btn-primary:hover {
     color: white;
 }
+
 .weight-button {
     display: block;
     width: 100%;
     margin-bottom: .5rem;
     border-radius: 10px;
-    border: 1px solid rgb(187,187,187);
-    color: rgb(66, 66, 66);
+    background-color: white;
     text-align: center;
+    border: 1px solid rgb(187,187,187);
 }
 
-    .weight-button:active, .weight-button-selected, .weight-button-selected:active, .weight-button-selected:hover {
-        background-color: var(--primary-color);
-        color: white;
-        border-color: white;
-    }
+.weight-button:active, .weight-button-selected, .weight-button-selected:active, .weight-button-selected:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: white;
+}
 
 
 /* loading screen */

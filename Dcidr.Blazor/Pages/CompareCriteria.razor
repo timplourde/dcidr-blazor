@@ -6,7 +6,7 @@
 <h1>Compare criteria</h1>
 
 <p class="mb-3">
-    <small>Complete each sentence.</small>
+    Complete each sentence.
 </p>
 
 <div class="comparison-container-list d-flex flex-wrap ">
@@ -19,10 +19,16 @@
 <hr />
 
 <div class="d-flex justify-content-between mb-3">
-    <NavLink class="d-btn" href="compare-options">&lt;&nbsp;Back</NavLink>
+    
+    <NavLink class="d-btn" href="compare-options" title="Back">
+        <img src="images/arrow-left.svg" /> Back
+    </NavLink>
+
     @if (AppModel.Decision.ResultPrerequisitesMet)
     {
-        <NavLink class="d-btn d-btn-primary" href="results">View&nbsp;Results&nbsp;&gt;</NavLink>
+        <NavLink class="d-btn d-btn-primary" title="View Results" href="results">
+            View Results <Dcidr.Blazor.Shared.InlineSvg.ArrowRight/>
+        </NavLink>
     }
 </div>
 
@@ -31,7 +37,7 @@
 @code {
     protected override void OnInitialized()
     {
-        if (!AppModel.Decision.AllOptionComparisonsHaveWeights)
+        if (!AppModel.Decision.HasEnoughCriteria || !AppModel.Decision.AllOptionComparisonsHaveWeights)
         {
             NavigationManager.NavigateTo("/compare-options");
         }

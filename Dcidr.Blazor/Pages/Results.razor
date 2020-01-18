@@ -9,7 +9,7 @@
 <h1>Results</h1>
 
 <p class="mb-3">
-    <small><strong>All done!</strong>  Here's how your options are ranked based on your responses:</small>
+    <strong>All done!</strong>  Here's how your options are ranked based on your responses:
 </p>
 
 <ol class="result-container mb-3">
@@ -25,13 +25,19 @@
     }
 </ol>
 
-<hr/>
+<hr />
 
-<a class="d-btn" href="">&lt;&nbsp;Back</a>
+<p>This calculation was done by using a prioritization matrix.  See how the math works by exporting to Excel.</p>
+
+<button class="btn btn-secondary" @onclick="DownloadExcelFile" title="Download Excel File">
+    <img src="images/download.svg" />
+    Download Excel File
+</button>
+
 
 <hr />
 
-<div><strong>Save this decision to your device</strong></div>
+<p>Save this decision to your device if you want to review it in the future.</p>
 
 
 <div class="input-group mb-3 input-group-container">
@@ -40,17 +46,27 @@
            @onkeyup="OnNameKeyup"
            placeholder="Enter a name">
     <div class="input-group-append">
-        <button class="btn btn-primary" disabled="@isLoading" @onclick="SaveAsync" type="button">Save</button>
+        <button class="btn btn-secondary" disabled="@isLoading" @onclick="SaveAsync" type="button" title="Save">
+            <img src="images/save.svg" />
+            Save
+        </button>
     </div>
 </div>
-<hr />
-
-<button class="d-btn" @onclick="DownloadExcelFile">Download Excel File</button>
 
 
 <hr />
 
-<a class="d-btn" href="">Go home</a>
+<div class="d-flex justify-content-between mb-3">
+
+    <NavLink class="d-btn" href="compare-criteria" title="Back">
+        <img src="images/arrow-left.svg" /> Back
+    </NavLink>
+
+    <NavLink class="d-btn" href="" title="Home"><img src="images/home.svg" /> Home</NavLink>
+
+</div>
+
+    
 
 
 @code {
