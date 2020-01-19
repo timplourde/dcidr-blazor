@@ -2,11 +2,10 @@
 (function () {
 
     // cache-then-network model
-
     // bump this any time the app changes
-    var currentCacheName = "1";
+    const currentCacheName = "1";
 
-    var loggingEnabled = true;
+    const loggingEnabled = true;
 
     function log(message) {
         if (loggingEnabled) {
@@ -15,8 +14,16 @@
     }
 
     function handleFetch(event) {
-        let url = event.request.url;
+        const url = event.request.url;
+
+        const ignoredHosts = ['localhost'];
+        const { hostname } = new URL(event.request.url);
+        if (ignoredHosts.indexOf(hostname) >= 0) {
+            return;
+        }
+
         log('fetching resource: ' + url);
+
         event.respondWith(
             caches.match(event.request).then((r) => {
                 if (r) {
