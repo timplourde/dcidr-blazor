@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A39D8AE4-0122-4835-9A76-96D8CEB369DD}"
 	ProjectSection(SolutionItems) = preProject
 		data\decisionmatrix.xlsx = data\decisionmatrix.xlsx
+		ship.ps1 = ship.ps1
 	EndProjectSection
 EndProject
 Global
