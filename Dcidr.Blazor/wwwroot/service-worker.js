@@ -3,9 +3,9 @@
 
     // cache-then-network model
     // bump this any time the app changes
-    const currentCacheName = "2";
+    const currentCacheName = "VERSION";
 
-    const loggingEnabled = true;
+    const loggingEnabled = false;
 
     function log(message) {
         if (loggingEnabled) {
