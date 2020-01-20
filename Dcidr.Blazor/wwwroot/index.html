@@ -30,18 +30,30 @@
 
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js',{
+            navigator.serviceWorker.register('service-worker.js', {
                 updateViaCache: 'none'
-               }).then(function (registration) {
-                   console.log('SW registration successful, scope is:', registration.scope);
-              })
-              .catch(function(error) {
-                console.log('SW registration failed, error:', error);
-              });
+            }).then(function (registration) {
+                console.log('SW registration successful, scope is:', registration.scope);
+            })
+                .catch(function (error) {
+                    console.log('SW registration failed, error:', error);
+                });
         };
     </script>
 
     <!-- /PWA -->
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52340123-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-52340123-1');
+    </script>
+
 
 
     <base href="/" />

@@ -16,7 +16,7 @@
     function handleFetch(event) {
         const url = event.request.url;
 
-        const ignoredHosts = ['localhost'];
+        const ignoredHosts = ['localhost', 'www.google-analytics.com', 'www.googletagmanager.com'];
         const { hostname } = new URL(event.request.url);
         if (ignoredHosts.indexOf(hostname) >= 0) {
             return;
@@ -57,5 +57,6 @@
 
     self.addEventListener('fetch', handleFetch);
     self.addEventListener('activate', cleanCache);
+
 })();
 
