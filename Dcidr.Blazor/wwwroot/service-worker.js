@@ -3,7 +3,7 @@
 
     // cache-then-network model
     // bump this any time the app changes
-    const currentCacheName = "1";
+    const currentCacheName = "2";
 
     const loggingEnabled = true;
 
