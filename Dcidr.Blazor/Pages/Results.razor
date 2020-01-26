@@ -75,10 +75,7 @@
 
     protected override void OnInitialized()
     {
-        if (!AppModel.Decision.ResultPrerequisitesMet)
-        {
-            NavigationManager.NavigateTo("/criteria");
-        }
+        AppModel.EnforeStepPrerequisites(DcidrStep.Results, NavigationManager);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
