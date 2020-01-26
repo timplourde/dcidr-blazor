@@ -29,7 +29,7 @@
         </div>
 
 
-        @if (AppModel.Decision.Criteria.Items.Count() == 0)
+        @if (AppModel.Decision.Options.Items.Count() == 0)
         {
             <div class="p-1">
                 <em>At least two options are required to proceed.</em>
@@ -51,14 +51,14 @@
 
         <div class="d-flex justify-content-between  mb-3">
 
-            <NavLink class="d-btn" href="criteria" title="Back">
+            <NavLink class="d-btn" href="/" title="Home">
                 <img src="images/arrow-left.svg" />
-                Back
+                Home
             </NavLink>
 
             @if (AppModel.Decision.HasEnoughOptions)
             {
-                <NavLink class="d-btn d-btn-primary" title="Continue" href="compare-options">
+                <NavLink class="d-btn d-btn-primary" title="Continue" href="criteria">
                     Continue <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
                 </NavLink>
             }
@@ -86,14 +86,6 @@
         if (args.Key == "Enter")
         {
             AddOption();
-        }
-    }
-
-    protected override void OnInitialized()
-    {
-        if (!AppModel.Decision.HasEnoughCriteria)
-        {
-            NavigationManager.NavigateTo("/criteria");
         }
     }
 }

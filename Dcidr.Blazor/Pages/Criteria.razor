@@ -45,14 +45,14 @@
             <hr />
 
             <div class="d-flex justify-content-between  mb-3">
-                <NavLink class="d-btn" href="" title="Home">
+                <NavLink class="d-btn" href="options" title="Back">
                     <img src="images/arrow-left.svg" />
-                    Home
+                    Back
                 </NavLink>
 
                 @if (AppModel.Decision.HasEnoughCriteria)
                 {
-                    <NavLink class="d-btn d-btn-primary" title="Continue" href="options">
+                    <NavLink class="d-btn d-btn-primary" title="Continue" href="compare-options">
                         Continue <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
                     </NavLink>
                 }
@@ -84,5 +84,10 @@
         {
             AddCriteria();
         }
+    }
+
+    protected override void OnInitialized()
+    {
+        AppModel.EnforeStepPrerequisites(DcidrStep.Criteria, NavigationManager);
     }
 }
