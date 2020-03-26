@@ -1,7 +1,7 @@
 # publish app
 dotnet publish -c Release
 
-$publishPath = '.\Dcidr.Blazor\bin\Release\netstandard2.1\publish\Dcidr.Blazor\dist';
+$publishPath = '.\Dcidr.Blazor\bin\Release\netstandard2.1\publish\wwwroot';
 
 # bump sw cache version number
 $serviceWOrkerPath = $publishPath + '\service-worker.js';
