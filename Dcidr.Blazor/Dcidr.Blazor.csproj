@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazored.LocalStorage" Version="2.1.1" />
-    <PackageReference Include="EPPlus" Version="5.0.0-beta" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0-preview2.20160.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0-preview2.20160.5" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview2.20160.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.0-preview2.20160.5" PrivateAssets="all" />
+    <PackageReference Include="Blazored.LocalStorage" Version="2.1.5" />
+    <PackageReference Include="EPPlus" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0-preview4.20210.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Build" Version="3.2.0-preview4.20210.8" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.0-preview4.20210.8" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
