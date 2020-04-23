@@ -38,3 +38,16 @@ jobs:
       
     - name: Publish
       run: dotnet publish Dcidr.Blazor -o publish -c Release
+      
+    # deploy to azure blob storage (static website)
+    - name: Azure Static Website
+      uses: tibor19/static-website-deploy@v1
+      with:
+        # Connection String of the Azure Storage Container
+        connection-string: ${{ secrets.azureBlobStorageConnectionString }}
+        # Name of the Blob Container Storage
+        blob-container-name: $web
+        # Enabled static website
+        enabled-static-website: true
+        # If the existing files should be removed before uploading the new files
+        remove-existing-files: true
