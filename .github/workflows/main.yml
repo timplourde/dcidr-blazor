@@ -37,6 +37,7 @@ jobs:
       run: dotnet test
       
     - name: Publish
+      if: github.ref == 'refs/heads/master'
       run: dotnet publish Dcidr.Blazor -o publish -c Release
       
     # deploy to azure blob storage (static website)
