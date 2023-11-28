@@ -1,16 +1,26 @@
 ﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
+
+<header>
+    <a href="/" alt="Dcidr Home">
+        <img src="images/dcidr.svg" />
+    </a>
+</header>
+
+<main>
+    <div class="container">
+        @Body
     </div>
+</main>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<footer>
+    <p>
+    For entertainment purposes only.
+    </p>
+    <p>
+        &copy; @DateTime.Now.Year Tim Plourde
+        &middot; 
+        <a href="mailto:tplourde@gmail.com">email</a>
+        &middot; 
+        <a href="https://github.com/timplourde/dcidr-blazor">GitHub</a>
+    </p>
+</footer>

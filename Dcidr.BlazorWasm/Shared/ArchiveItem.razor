@@ -1,0 +1,25 @@
+﻿<li class="decision-item d-flex justify-content-between">
+    <a href="" @onclick="HandleLoad"><strong>@Item!.Name</strong> <small>(@Item!.DateCreatedUtc.ToShortDateString())</small></a>
+    <div class="decicion-item-button" @onclick="HandleDelete" title="Delete"><img src="images/trash-2.svg" /></div>
+</li>
+
+@code {
+    [Parameter]
+    public DecisionArchiveItem? Item { get; set; }
+
+    private void HandleDelete(MouseEventArgs e)
+    {
+        OnDelete.InvokeAsync(Item);
+    }
+
+    private void HandleLoad(MouseEventArgs e)
+    {
+        OnLoad.InvokeAsync(Item);
+    }
+
+    [Parameter]
+    public EventCallback<DecisionArchiveItem> OnDelete { get; set; }
+
+    [Parameter]
+    public EventCallback<DecisionArchiveItem> OnLoad { get; set; }
+}

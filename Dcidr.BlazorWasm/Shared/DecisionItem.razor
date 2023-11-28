@@ -1,0 +1,12 @@
+﻿<li class="decision-item d-flex justify-content-between">
+    <div>@Item</div>
+    <div class="decicion-item-button" @onclick="OnDelete" title="Delete"><img src="images/x-circle.svg" /></div>
+</li>
+
+@code {
+    [Parameter]
+    public string? Item { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnDelete { get; set; }
+}

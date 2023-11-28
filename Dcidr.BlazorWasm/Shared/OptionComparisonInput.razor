@@ -1,0 +1,44 @@
+﻿@using Dcidr.Model;
+@inject DcidrAppModel AppModel
+
+    <div  class="comparison-container">
+        <div>Regarding <strong>@Item!.Criterion</strong>,</div>
+        <div><strong>@Item.OptionOne</strong> is</div>
+
+        @foreach (var weightOption in allWeightOptions)
+        {
+            <button @onclick="@( () => SetWeight(weightOption.weight))" 
+                    class="btn weight-button @( 
+                        Item.Weight.HasValue && Item.Weight == weightOption.weight  ? "weight-button-selected" : ""
+                        )"
+                    >@weightOption.description</button>
+        }
+
+        <div><strong>@($"{Item.OptionTwo}.")</strong></div>
+    </div>
+
+@code {
+
+    private List<(string description, Weight weight)> allWeightOptions = new List<(string, Weight)>
+    {
+        ("much better than", Weight.MuchGreaterThan),
+        ("better than", Weight.GreaterThan),
+        ("about the same as", Weight.AboutEqualTo),
+        ("worse than", Weight.LessThan),
+        ("much worse than", Weight.MuchLessThan)
+    };
+
+    [Parameter]
+    public OptionComparison? Item { get; set; }
+
+    [Parameter]
+    public EventCallback WeightChanged { get; set; }
+
+    public void SetWeight(Weight weight)
+    {
+        Item!.SetWeight(weight);
+
+        // this is necessary to tell the parent to update itself
+        WeightChanged.InvokeAsync(null);
+    }
+}
