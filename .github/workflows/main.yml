@@ -19,13 +19,13 @@ jobs:
     steps:
     
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.7.2
+      uses: actions/setup-dotnet@v3
       with:
         # SDK version to use. Example: 2.2.104
-        dotnet-version: 6.0.100
+        dotnet-version: 8.0.0
         
     - name: Restore NuGet Packages
       run: dotnet restore
@@ -38,12 +38,12 @@ jobs:
       
     - name: Publish
       if: github.ref == 'refs/heads/master'
-      run: dotnet publish Dcidr.Blazor -o publish -c Release
+      run: dotnet publish Dcidr.BlazorWasm -o publish -c Release
       
     # deploy to azure blob storage (static website)
     - name: Upload to Azure Static Website
       if: github.ref == 'refs/heads/master'
-      uses: tibor19/static-website-deploy@v1
+      uses: tibor19/static-website-deploy@v3
       with:
         # Connection String of the Azure Storage Container
         connection-string: ${{ secrets.azureBlobStorageConnectionString }}
