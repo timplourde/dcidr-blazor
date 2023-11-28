@@ -1,7 +1,7 @@
 ﻿@page "/criteria"
 @inject DcidrAppModel AppModel
 @inject NavigationManager NavigationManager
-@using Dcidr.Blazor.Shared
+@using Dcidr.BlazorWasm.Shared
 
     <div class="fade-in">
 
@@ -53,7 +53,7 @@
                 @if (AppModel.Decision.HasEnoughCriteria)
                 {
                     <NavLink class="d-btn d-btn-primary" title="Continue" href="compare-options">
-                        Continue <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
+                        Continue <Dcidr.BlazorWasm.Shared.InlineSvg.ArrowRight />
                     </NavLink>
                 }
 
@@ -67,7 +67,7 @@
 
 @code {
 
-    private string newCriteriaInput;
+    private string? newCriteriaInput;
 
     private void AddCriteria()
     {

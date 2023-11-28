@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Dcidr.Blazor
+namespace Dcidr.BlazorWasm
 {
     public class DcidrAppModel
     {

@@ -15,18 +15,25 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    strategy:
+        matrix:
+            dotnet-version: ['8.0.x']
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.7.2
+    - name: Setup dotnet ${{ matrix.dotnet-version  }}
+      uses: actions/setup-dotnet@v3
       with:
         # SDK version to use. Example: 2.2.104
-        dotnet-version: 6.0.100
+        dotnet-version: ${{ matrix.dotnet-version  }}
         
+    - name: Display dotnet version
+      run: dotnet --version
+
     - name: Restore NuGet Packages
       run: dotnet restore
     
@@ -38,12 +45,12 @@ jobs:
       
     - name: Publish
       if: github.ref == 'refs/heads/master'
-      run: dotnet publish Dcidr.Blazor -o publish -c Release
+      run: dotnet publish Dcidr.BlazorWasm -o publish -c Release
       
     # deploy to azure blob storage (static website)
     - name: Upload to Azure Static Website
       if: github.ref == 'refs/heads/master'
-      uses: tibor19/static-website-deploy@v1
+      uses: tibor19/static-website-deploy@v3
       with:
         # Connection String of the Azure Storage Container
         connection-string: ${{ secrets.azureBlobStorageConnectionString }}

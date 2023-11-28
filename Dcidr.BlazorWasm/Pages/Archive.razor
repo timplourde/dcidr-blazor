@@ -15,7 +15,7 @@
             @if (showList)
             {
                 <ul class="decision-item-list">
-                    @foreach (var d in decisionArchive.Decisions)
+                    @foreach (var d in decisionArchive!.Decisions)
                     {
                         <ArchiveItem @key="@d.Id"
                                      Item="@d"
@@ -45,7 +45,7 @@
 
     private bool isLoading;
     private bool showList;
-    private DecisionArchive decisionArchive;
+    private DecisionArchive? decisionArchive;
 
     private async Task Refresh()
     {
@@ -65,7 +65,7 @@
         await localStorage.RemoveItemAsync($"decision-{decisionArchiveItem.Id}");
 
         await localStorage.GetItemAsync<DecisionArchive>("decision-archive");
-        decisionArchive.Remove(decisionArchiveItem);
+        decisionArchive!.Remove(decisionArchiveItem);
         await localStorage.SetItemAsync("decision-archive", decisionArchive);
         
         await Refresh();

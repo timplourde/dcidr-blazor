@@ -1,6 +1,6 @@
 ﻿@page "/options"
 @inject DcidrAppModel AppModel
-@using Dcidr.Blazor.Shared
+@using Dcidr.BlazorWasm.Shared
 @inject NavigationManager NavigationManager
 
     <div class="fade-in">
@@ -59,7 +59,7 @@
             @if (AppModel.Decision.HasEnoughOptions)
             {
                 <NavLink class="d-btn d-btn-primary" title="Continue" href="criteria">
-                    Continue <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
+                    Continue <Dcidr.BlazorWasm.Shared.InlineSvg.ArrowRight />
                 </NavLink>
             }
         </div>
@@ -70,7 +70,7 @@
 
 
 @code {
-    private string newOptionInput;
+    private string? newOptionInput;
 
     private void AddOption()
     {

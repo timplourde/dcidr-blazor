@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dcidr.Model", "Dcidr.Model\Dcidr.Model.csproj", "{3ED731D0-669D-4457-9467-D18DEE813B17}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dcidr.Blazor", "Dcidr.Blazor\Dcidr.Blazor.csproj", "{B293B192-556E-4143-9E82-3A565318DE93}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dcidr.Model.Tests", "Dcidr.Model.Tests\Dcidr.Model.Tests.csproj", "{FC1F182D-3E0F-403A-B589-3DE69CB7DEFF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dcidr.Excel", "Dcidr.Excel\Dcidr.Excel.csproj", "{D701E8EE-E516-420F-8FCE-467EF1A166AD}"
@@ -19,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.github\workflows\main.yml = .github\workflows\main.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dcidr.BlazorWasm", "Dcidr.BlazorWasm\Dcidr.BlazorWasm.csproj", "{8113B10B-3826-4D76-A6A7-214EE7480FE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +29,6 @@ Global
 		{3ED731D0-669D-4457-9467-D18DEE813B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ED731D0-669D-4457-9467-D18DEE813B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ED731D0-669D-4457-9467-D18DEE813B17}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B293B192-556E-4143-9E82-3A565318DE93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B293B192-556E-4143-9E82-3A565318DE93}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B293B192-556E-4143-9E82-3A565318DE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B293B192-556E-4143-9E82-3A565318DE93}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FC1F182D-3E0F-403A-B589-3DE69CB7DEFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FC1F182D-3E0F-403A-B589-3DE69CB7DEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC1F182D-3E0F-403A-B589-3DE69CB7DEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{D28A8DB5-83DF-4D04-9B2F-2423A03E468E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D28A8DB5-83DF-4D04-9B2F-2423A03E468E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D28A8DB5-83DF-4D04-9B2F-2423A03E468E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8113B10B-3826-4D76-A6A7-214EE7480FE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8113B10B-3826-4D76-A6A7-214EE7480FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8113B10B-3826-4D76-A6A7-214EE7480FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8113B10B-3826-4D76-A6A7-214EE7480FE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿@page "/compare-criteria"
 @inject DcidrAppModel AppModel
-@using Dcidr.Blazor.Shared
+@using Dcidr.BlazorWasm.Shared
 @inject NavigationManager NavigationManager
 
 <div class="fade-in">
@@ -37,7 +37,7 @@
         @if (AppModel.Decision.ResultPrerequisitesMet)
         {
             <NavLink class="d-btn d-btn-primary" title="View Results" href="results">
-                View Results <Dcidr.Blazor.Shared.InlineSvg.ArrowRight />
+                View Results <Dcidr.BlazorWasm.Shared.InlineSvg.ArrowRight />
             </NavLink>
         }
         else

@@ -1,11 +1,11 @@
 ﻿<li class="decision-item d-flex justify-content-between">
-    <a href="" @onclick="HandleLoad"><strong>@Item.Name</strong> <small>(@Item.DateCreatedUtc.ToShortDateString())</small></a>
+    <a href="" @onclick="HandleLoad"><strong>@Item!.Name</strong> <small>(@Item!.DateCreatedUtc.ToShortDateString())</small></a>
     <div class="decicion-item-button" @onclick="HandleDelete" title="Delete"><img src="images/trash-2.svg" /></div>
 </li>
 
 @code {
     [Parameter]
-    public DecisionArchiveItem Item { get; set; }
+    public DecisionArchiveItem? Item { get; set; }
 
     private void HandleDelete(MouseEventArgs e)
     {
