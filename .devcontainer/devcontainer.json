@@ -1,0 +1,47 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
+{
+	"name": "C# (.NET)",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/dotnet:9.0",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/dotnet:2": {
+			"version": "none",
+			"dotnetRuntimeVersions": "latest, lts",
+			"aspnetCoreRuntimeVersions": "latest, lts"
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [5000, 5001],
+	// "portsAttributes": {
+	//		"5001": {
+	//			"protocol": "https"
+	//		}
+	// }
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore",
+	
+	// this prevents a git security error false-positive
+	"postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+            "extensions": [
+                "ms-dotnettools.csdevkit"
+            ]
+        }
+	},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+
+	// get ssh keys for github auth
+	"mounts": [
+    	"type=bind,source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,readonly",
+	]
+}
