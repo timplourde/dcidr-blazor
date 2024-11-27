@@ -10,7 +10,7 @@
 
     <!-- PWA -->
 
-    <link rel="manifest" href="manifest.json">
+    <link href="manifest.json" rel="manifest" />
 
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -29,18 +29,6 @@
     <link rel="icon" type="image/png" sizes="64x64" href="icons/dcidr_icon_64.png">
     <link rel="apple-touch-icon" type="image/png" sizes="64x64" href="icons/dcidr_icon_64.png">
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js', {
-                updateViaCache: 'none'
-            }).then(function (registration) {
-                console.log('SW registration successful, scope is:', registration.scope);
-            })
-                .catch(function (error) {
-                    console.log('SW registration failed, error:', error);
-                });
-        };
-    </script>
 
     <!-- /PWA -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -80,6 +68,7 @@
 
     <script src="js/utils.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
 </body>
 
 </html>
